@@ -34,7 +34,7 @@ public final class Portefeuille {
     private ArrayList<Action> listeAction = new ArrayList<>();
 
     /**
-     * Constructeur avec l'initialisation de l'identifiant et du solde du
+     * Constructeur avec l'initialisation du nom du Propriétaire et du solde du
      * portefeuille.
      *
      * @param designationProprietaire Nom du propriétaire.
@@ -51,8 +51,7 @@ public final class Portefeuille {
      *
      * @param designationProprietaire Nom du propriétaire du portefeuille.
      */
-    public void
-            definirNomProprietaire(final String designationProprietaire) {
+    public void definirNomProprietaire(final String designationProprietaire) {
         this.nomProprietaire = designationProprietaire;
     }
 
@@ -111,15 +110,6 @@ public final class Portefeuille {
     }
 
     /**
-     * Permet l'ajout d'une action au portefeuille.
-     *
-     * @param action action que nous voulons ajouter au portefeuille.
-     */
-    public void ajoutAction(final Action action) {
-        this.listeAction.add(action);
-    }
-
-    /**
      * Permet d'enlever une quantité d'acion du portefeuille.
      *
      * @param action action à enlever du portefeuille.
@@ -137,12 +127,13 @@ public final class Portefeuille {
     }
 
     /**
-     * Affiche les détails du portefeuille : l'identifiant, le solde, la liste
-     * des actions détenues, la liste des transactions effectuées et la liste
-     * des ordres en attente.
+     * Affiche les détails du portefeuille : le nom du Proprietaire, le solde, 
+     * la liste des actions détenues.
+     * et la liste des ordres en attente.
      */
     @Override
     public String toString() {
-        return "Portefeuille{" + "nomProprietaire=" + nomProprietaire + ", solde=" + solde + ", listeAction=" + listeAction + '}';
+        return "Portefeuille{" + "nomProprietaire=" + nomProprietaire + 
+                ", solde=" + solde + ", listeAction=" + listeAction + '}';
     }
 }
