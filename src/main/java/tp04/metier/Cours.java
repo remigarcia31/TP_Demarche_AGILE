@@ -12,4 +12,30 @@ package tp04.metier;
  */
 public class Cours {
     
+    private float cours;
+
+    /**
+     *
+     * @param cours
+     */
+    public Cours(float cours) {
+        this.cours = cours;
+    }
+
+    /**
+     *
+     * @return cours
+     */
+    public float getCours() {
+        return cours;
+    }
+
+    /**
+     *
+     * @param cours
+     */
+    public void setCours(float cours) {
+        this.cours = cours;
+    }
+
 }

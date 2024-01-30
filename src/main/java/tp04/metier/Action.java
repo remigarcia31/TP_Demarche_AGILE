@@ -6,8 +6,6 @@
 
 package tp04.metier;
 
-import java.util.Date;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -18,32 +16,7 @@ public abstract class Action {
 /**
  * Bien sûr les methodes setter et getter pour l'ensemble des propriétés.
  * et Creation des proprietes de la classe
- */
-    /**
-     *
-     * @param idAction
-     * L'id d'une action est une valeur constante
-     * */
-    private final int idAction;
-     /**
-     *
-     * @param coursMap
-     * La coursMap représente une liste des cours au fil du temps
-     * */
-    private Map<Date, Float> coursMap;
-
-     /**
-     *
-     * @param Entreprise
-     * L'Entreprise concerne l'entreprise de l'action en question
-     * */
-    private String Entreprise; 
-    /**
-     *
-     * @param Domaine
-     * Le domaine correspond au domaine d'activite de l'entreprise
-     * */
-    private String Domaine;
+**/    
     /**
      *
      * @param libelle
@@ -52,76 +25,10 @@ public abstract class Action {
     private String libelle;
     /**
      *
-     * @param idAction
-     * @param coursMap
-     * @param Entreprise
-     * @param Domaine
      * @param libelle
      */
-    public Action(final int idAction, Map<Date, Float> coursMap, String Entreprise,
-            String Domaine, String libelle) {
-        this.idAction = idAction;
-        this.coursMap = coursMap;
-        this.Entreprise = Entreprise;
-        this.Domaine = Domaine;
+    public Action(String libelle) {
         this.libelle = libelle;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public int getidAction() {
-        return idAction;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Map<Date, Float> getCoursMap() {
-        return coursMap;
-    }
-
-    /**
-     *
-     * @param coursMap
-     */
-    public void setCoursMap(Map<Date, Float> coursMap) {
-        this.coursMap = coursMap;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getEntreprise() {
-        return Entreprise;
-    }
-
-    /**
-     *
-     * @param Entreprise
-     */
-    public void setEntreprise(String Entreprise) {
-        this.Entreprise = Entreprise;
-    }
-
-    /**
-     * Get the value of Domaine
-     *
-     * @return
-     */
-    public String getDomaine() {
-        return Domaine;
-    }
-
-    /**
-     *
-     * @param Domaine
-     */
-    public void setDomaine(String Domaine) {
-        this.Domaine = Domaine;
     }
 
     /**
@@ -135,6 +42,7 @@ public abstract class Action {
     /**
      *
      * @param Libelle
+     * Cette fonction nous permet de set Libelle d'une action
      */
     public void setLibelle(String Libelle) {
         this.libelle = Libelle;
@@ -142,7 +50,7 @@ public abstract class Action {
   
     /**
      *
-     * @return
+     * @return the hash code 
      */
     @Override
     public int hashCode() {
@@ -171,7 +79,7 @@ public abstract class Action {
 
     /**
      *
-     * @return libelle 
+     * @return libelle de l'action
      */
     @Override
     public String toString() {
