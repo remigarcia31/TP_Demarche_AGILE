@@ -4,7 +4,6 @@
 package tp04.metier;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * <p>
@@ -18,11 +17,6 @@ import java.util.Objects;
  * @licence Apache 2.0
  */
 public final class Portefeuille {
-
-    /**
-     * Identifiant unique du portefeuille.
-     */
-    private Integer id = null;
 
     /**
      * Nom du propriétaire du portefeuille.
@@ -49,17 +43,7 @@ public final class Portefeuille {
     public Portefeuille(final double montant,
             final String designationProprietaire) {
         this.nomProprietaire = designationProprietaire;
-        this.id = this.nomProprietaire.hashCode();
         this.solde = montant;
-    }
-
-    /**
-     * Définit l'identifiant du portefeuille.
-     *
-     * @param identifiant Identifiant unique du portefeuille.
-     */
-    public void definirId(final Integer identifiant) {
-        this.id = identifiant;
     }
 
     /**
@@ -91,15 +75,6 @@ public final class Portefeuille {
     }
 
     /**
-     * Obtient l'identifiant du portefeuille.
-     *
-     * @return Identifiant unique du portefeuille.
-     */
-    public Integer obtenirId() {
-        return this.id;
-    }
-
-    /**
      * Obtient le nom du propriétaire du portefeuille.
      *
      * @return Nom du propriétaire du portefeuille.
@@ -124,25 +99,6 @@ public final class Portefeuille {
      */
     public ArrayList<Action> obtenirListeAction() {
         return this.listeAction;
-    }
-
-    /**
-     * Calcule et retourne le code de hachage du portefeuille. Le code de
-     * hachage est basé sur le nom du propriétaire du portefeuille.
-     *
-     * @return Code de hachage du portefeuille.
-     */
-    @Override
-    public int hashCode() {
-
-        final int hash = 3;
-        final int hashMultiplier = 53;
-
-        int finalID;
-
-        finalID = hashMultiplier * hash
-                + Objects.hashCode(this.nomProprietaire);
-        return finalID;
     }
 
     /**
@@ -185,12 +141,8 @@ public final class Portefeuille {
      * des actions détenues, la liste des transactions effectuées et la liste
      * des ordres en attente.
      */
-    public void afficherPortefeuille() {
-        System.out.println("Portefeuille : " + this.id);
-        System.out.println("Solde : " + this.solde);
-        System.out.println("Liste des actions : ");
-        for (Action action : this.listeAction) {
-            action.afficherAction();
-        }
+    @Override
+    public String toString() {
+        return "Portefeuille{" + "nomProprietaire=" + nomProprietaire + ", solde=" + solde + ", listeAction=" + listeAction + '}';
     }
 }
