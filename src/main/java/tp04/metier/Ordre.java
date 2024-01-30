@@ -25,9 +25,13 @@ public class Ordre {
      * L'utilisateur crée un ordre qui teste le marché (prix quantité) pour 
      * permettre la réalisation d'une transaction
      */
-    
-    private final int id;
-    private String statut;
+    enum Statut {
+        OUVERT,
+        VALIDER,
+        REFUSER
+    };
+
+    private Statut statut;
     private long prixUnit;
     
     private boolean estAchat; // achat vente
@@ -35,34 +39,32 @@ public class Ordre {
     private int quantite;
     private String dateOuverture;
     private String dateCloture;
-    
+    private Portefeuille portefeuille;
+    private boolean estAuMarche;
 
-    public Ordre (boolean estAchat, Action action, long prixUnit, int quantite, String dateCloture)
+    public Ordre (
+            boolean estAchat, Action action,
+            long prixUnit, int quantite, 
+            String dateCloture, Portefeuille portefeuille,
+            boolean estAuMarche
+    )
     {
-        this.id = 0;
-        this.statut = "Ouvert";
+        this.statut = statut.OUVERT;
         this.prixUnit = prixUnit;
         this.estAchat = estAchat;
         this.action = action;
         this.quantite = quantite;
         this.dateCloture = dateCloture; 
+        this.portefeuille = portefeuille;
+        this.estAuMarche = estAuMarche;
     }
     
-    /**
-     * Get the value of id
-     *
-     * @return the value of id
-     */
-    public int getId() {
-        return id;
-    }
-
     /**
      * Get the value of statut
      *
      * @return the value of statut
      */
-    public String getStatut() {
+    public Statut getStatut() {
         return this.statut;
     }
 
@@ -71,7 +73,7 @@ public class Ordre {
      *
      * @param statut new value of statut
      */
-    public void setStatut(String statut) {
+    public void setStatut(Statut statut) {
         this.statut = statut;
     }
     
@@ -181,7 +183,58 @@ public class Ordre {
      */
     public void setDateCloture(String dateCloture) {
         this.dateCloture = dateCloture;
+    }   
+
+    /**
+     * Get the value of portefeuille
+     *
+     * @return the value of portefeuille
+     */
+    public Portefeuille getPortefeuille() {
+        return this.portefeuille;
     }
 
+    /**
+     * Set the value of portefeuille
+     *
+     * @param portefeuille new value of portefeuille
+     */
+    public void setPortefeuille(Portefeuille portefeuille) {
+        this.portefeuille = portefeuille;
+    } 
+
+    /**
+     * Get the value of estAuMarche
+     *
+     * @return the value of typeOrdre
+     */
+    public boolean getEstAuMarche() {
+        return this.estAuMarche;
+    }
+
+    /**
+     * Set the value of estAuMarche
+     *
+     * @param estAuMarche new value of estAuMarche
+     */
+    public void setEstAuMarche(boolean estAuMarche) {
+        this.estAuMarche = estAuMarche;
+    } 
+
+    @Override
+    public String toString() {
+        return String.join("\n"
+                , (this.estAchat ? "Achat"  : "Vente") +  "de" +this.action.toString()
+                , "Statut de l'ordre : " + this.statut
+                , "Marché/limit ?    : " + (this.estAuMarche ? "Marché"  : "Limit")
+                , "Prix Unitaire     : " + this.prixUnit
+                , "Quantité          : " + this.quantite
+                , "Date ouverture    : " + this.dateOuverture
+                , "Date cloture      : " + this.dateCloture 
+       );
+    }
+    
+    
     
 }
+ 
