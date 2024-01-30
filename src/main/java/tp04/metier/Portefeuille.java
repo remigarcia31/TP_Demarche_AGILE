@@ -17,7 +17,7 @@ import java.util.Objects;
  * @author M2 IDA 2024
  * @licence Apache 2.0
  */
-public class Portefeuille {
+public final class Portefeuille {
 
     /**
      * Identifiant unique du portefeuille.
@@ -40,22 +40,6 @@ public class Portefeuille {
     private ArrayList<Action> listeAction = new ArrayList<>();
 
     /**
-     * Liste des transactions effectuées dans le portefeuille.
-     */
-    private ArrayList<Transaction> listeTransaction = new ArrayList<>();
-
-    /**
-     * Liste des ordres en attente dans le portefeuille.
-     */
-    private ArrayList<Ordre> listeOrdre = new ArrayList<>();
-
-    /**
-     * Constructeur par défaut de la classe Portefeuille.
-     */
-    public Portefeuille() {
-    }
-
-    /**
      * Constructeur avec l'initialisation de l'identifiant et du solde du
      * portefeuille.
      *
@@ -72,28 +56,29 @@ public class Portefeuille {
     /**
      * Définit l'identifiant du portefeuille.
      *
-     * @param id Identifiant unique du portefeuille.
+     * @param identifiant Identifiant unique du portefeuille.
      */
-    public void definirId(Integer id) {
-        this.id = id;
+    public void definirId(final Integer identifiant) {
+        this.id = identifiant;
     }
 
     /**
      * Définit le nom du propriétaire du portefeuille.
      *
-     * @param nomProprietaire Nom du propriétaire du portefeuille.
+     * @param designationProprietaire Nom du propriétaire du portefeuille.
      */
-    public void definirNomProprietaire(String nomProprietaire) {
-        this.nomProprietaire = nomProprietaire;
+    public void
+            definirNomProprietaire(final String designationProprietaire) {
+        this.nomProprietaire = designationProprietaire;
     }
 
     /**
      * Définit le solde du portefeuille.
      *
-     * @param solde Solde du portefeuille.
+     * @param montant Solde du portefeuille.
      */
-    public void definirSolde(double solde) {
-        this.solde = solde;
+    public void definirSolde(final double montant) {
+        this.solde = montant;
     }
 
     /**
@@ -101,27 +86,8 @@ public class Portefeuille {
      *
      * @param action Action à ajouter.
      */
-    public void ajouterAction(Action action) {
+    public void ajouterAction(final Action action) {
         this.listeAction.add(action);
-    }
-
-    /**
-     * Ajoute une transaction à la liste des transactions effectuées dans le
-     * portefeuille.
-     *
-     * @param transaction Transaction à ajouter.
-     */
-    public void ajouterTransaction(Transaction transaction) {
-        this.listeTransaction.add(transaction);
-    }
-
-    /**
-     * Ajoute un ordre à la liste des ordres en attente dans le portefeuille.
-     *
-     * @param ordre Ordre à ajouter.
-     */
-    public void ajouterOrdre(Ordre ordre) {
-        this.listeOrdre.add(ordre);
     }
 
     /**
@@ -161,24 +127,6 @@ public class Portefeuille {
     }
 
     /**
-     * Obtient la liste des transactions effectuées dans le portefeuille.
-     *
-     * @return Liste des transactions effectuées.
-     */
-    public ArrayList<Transaction> obtenirListeTransaction() {
-        return this.listeTransaction;
-    }
-
-    /**
-     * Obtient la liste des ordres en attente dans le portefeuille.
-     *
-     * @return Liste des ordres en attente.
-     */
-    public ArrayList<Ordre> obtenirListeOrdre() {
-        return this.listeOrdre;
-    }
-
-    /**
      * Calcule et retourne le code de hachage du portefeuille. Le code de
      * hachage est basé sur le nom du propriétaire du portefeuille.
      *
@@ -198,21 +146,30 @@ public class Portefeuille {
     }
 
     /**
-     * Permet d'enlever une action du portefeuille.
+     * Permet d'enlever une action au portefeuille.
      *
-     * @param action
+     * @param action action que nous voulons supprimer au portefeuille.
      */
-    public void enleverAction(Action action) {
+    public void enleverAction(final Action action) {
         this.listeAction.remove(action);
+    }
+
+    /**
+     * Permet l'ajout d'une action au portefeuille.
+     *
+     * @param action action que nous voulons ajouter au portefeuille.
+     */
+    public void ajoutAction(final Action action) {
+        this.listeAction.add(action);
     }
 
     /**
      * Permet d'enlever une quantité d'acion du portefeuille.
      *
-     * @param action
-     * @param quantite
+     * @param action action à enlever du portefeuille.
+     * @param quantite quantité de l'action que nous souhaitons enlever.
      */
-    public void enleverQuantiteAction(Action action, int quantite) {
+    public void enleverQuantiteAction(final Action action, final int quantite) {
         for (Action actionPortefeuille : this.listeAction) {
             if (actionPortefeuille.equals(action)) {
                 actionPortefeuille.enleverQuantite(quantite);
@@ -234,14 +191,6 @@ public class Portefeuille {
         System.out.println("Liste des actions : ");
         for (Action action : this.listeAction) {
             action.afficherAction();
-        }
-        System.out.println("Liste des transactions : ");
-        for (Transaction transaction : this.listeTransaction) {
-            transaction.afficherTransaction();
-        }
-        System.out.println("Liste des ordres : ");
-        for (Ordre ordre : this.listeOrdre) {
-            ordre.afficherOrdre();
         }
     }
 }
