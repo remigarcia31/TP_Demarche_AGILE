@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * La classe Portefeuille contient des informations sur les actions détenues, les transactions effectuées
- * et les ordres en attente pour un investisseur donné.
+ * <p>Descriptions de la classe portefeuille<p>
+ * <p>La classe Portefeuille contient des informations sur les actions détenues, les transactions effectuées
+ * et les ordres en attente pour un investisseur donné.</p>
  * @author M2 IDA 2024
+ * @licence Apache 2.0
  */
 public class Portefeuille {
     
@@ -159,6 +161,32 @@ public class Portefeuille {
         return hash;
     }
     
+    /**
+     * Permet d'enlever une action du portefeuille.
+     * @param Action 
+     */
+    public void enleverAction(Action action) {
+        this.listeAction.remove(action);
+    }
+
+    /**
+     * Permet d'enlever une quantité d'acion du portefeuille.
+     * @param action
+     * @param quantite
+     */
+    public void enleverQuantiteAction(Action action, int quantite) {
+        for (Action actionPortefeuille : this.listeAction) {
+            if (actionPortefeuille.equals(action)) {
+                actionPortefeuille.enleverQuantite(quantite);
+                if (actionPortefeuille.quantite < 1) {
+                    actionPortefeuille.enleverAction(action);
+                }
+            }
+        }
+    }
+
+
+
     /**
      * Affiche les détails du portefeuille : l'identifiant, le solde,
      * la liste des actions détenues, la liste des transactions effectuées
