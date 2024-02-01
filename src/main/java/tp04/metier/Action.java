@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Pour modifier les en-têtes de licence, choisissez les en-têtes 
+de licence dans les propriétés du projet.
+ * Pour modifier ce fichier modèle, choisissez Outils | Modèles
+ * et ouvrez le modèle dans l'éditeur.
  */
 
 package tp04.metier;
@@ -9,48 +10,57 @@ package tp04.metier;
 import java.util.Objects;
 
 /**
- *
+ * Classe abstraite représentant une action.
+ * Cette classe sert de base pour les classes dérivées représentant 
+ * des actions simples ou composées.
+ * Elle définit les propriétés communes à toutes les actions, 
+ * telles que le libellé.
+ * Elle fournit également des méthodes de comparaison et de représentation.
+ * 
  * @author perussel
  */
 public abstract class Action {
-/**
- * Bien sûr les methodes setter et getter pour l'ensemble des propriétés.
- * et Creation des proprietes de la classe
-**/    
+
+    // Attributs
+
     /**
-     *
-     * @param libelle
-     * Le libelle de l'action en question
-     * */
+     * Le libellé de l'action.
+     */
     private String libelle;
+
+    // Constructeur
+
     /**
-     *
-     * @param libelle
+     * Constructeur avec un paramètre pour initialiser le libellé de l'action.
+     * @param libelle Le libellé de l'action.
      */
     public Action(String libelle) {
         this.libelle = libelle;
     }
 
+    // Méthodes d'accès (Getters et Setters) pour les attributs
+
     /**
-     *
-     * @return
+     * Obtient le libellé de l'action.
+     * @return Le libellé de l'action.
      */
     public String getLibelle() {
         return libelle;
     }
 
     /**
-     *
-     * @param Libelle
-     * Cette fonction nous permet de set Libelle d'une action
+     * Modifie le libellé de l'action.
+     * @param Libelle Le nouveau libellé de l'action.
      */
     public void setLibelle(String Libelle) {
         this.libelle = Libelle;
     }
-  
+
+    // Méthodes pour la gestion des comparaisons et la représentation
+
     /**
-     *
-     * @return the hash code 
+     * Calcule et retourne le code de hachage de l'action.
+     * @return Le code de hachage de l'action.
      */
     @Override
     public int hashCode() {
@@ -61,9 +71,10 @@ public abstract class Action {
     }
 
     /**
-     *
-     * @param obj
-     * @return boolean
+     * Compare l'objet actuel avec un autre objet 
+     * pour l'égalité basée sur le libellé.
+     * @param obj L'objet à comparer avec l'action actuelle.
+     * @return true si les objets sont égaux, false sinon.
      */
     @Override
     public final boolean equals(Object obj) {
@@ -78,8 +89,8 @@ public abstract class Action {
     }
 
     /**
-     *
-     * @return libelle de l'action
+     * Retourne une représentation textuelle de l'action (le libellé).
+     * @return Le libellé de l'action sous forme de chaîne de caractères.
      */
     @Override
     public String toString() {

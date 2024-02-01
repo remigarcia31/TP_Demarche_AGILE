@@ -1,151 +1,182 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Pour modifier les en-têtes de licence, choisissez les en-têtes de licence 
+dans les propriétés du projet.
+ * Pour modifier ce fichier modèle, choisissez Outils | Modèles
+ * et ouvrez le modèle dans l'éditeur.
  */
 
 package tp04.metier;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
+ * Classe représentant une action simple héritant de la classe Action.
+ * Cette classe stocke des informations spécifiques à une action simple,
+ * telles que son identifiant, le nom de l'entreprise associée, le domaine, 
+ * et les valeurs de cours enregistrées.
+ * Elle offre des méthodes pour enregistrer de nouvelles valeurs de cours,
+ * obtenir des informations sur l'action,
+ * et mettre à jour les valeurs de cours de manière aléatoire.
+ * 
  * @author perussel
  */
 public class ActionSimple extends Action {
 
-    
-    private int Id;
-    
-    private String Entreprise;
-    
-    private String Domaine;
-    // attribut lien
+    // Attributs
 
     /**
-     *
+     * Identifiant unique pour l'action simple.
      */
-    public Map<Jour, Cours> mapCours;
-    // constructeur
+    private int id;
 
+    /**
+     * Nom de l'entreprise associée à l'action simple.
+     */
+    private String entreprise;
+
+    /**
+     * Domaine de l'action simple.
+     */
+    private String domaine;
+
+    /**
+     * Liste pour stocker les valeurs de cours associées à l'action simple.
+     */
+    private List<Double> listeCours;
+
+    // Constructeurs
+
+    /**
+     * Constructeur par défaut avec un paramètre pour le libellé de 
+     * l'action simple.
+     * @param libelle Le libellé de l'action simple.
+     */
     public ActionSimple(String libelle) {
         super(libelle);
     }
     
-    public ActionSimple(int Id, String Entreprise, String Domaine
-            , String libelle) {
-        // Action simple initialisée comme 1 action
+    /**
+     * Constructeur avec des paramètres pour initialiser 
+     * les attributs spécifiques de l'action simple.
+     * @param id Identifiant unique de l'action simple.
+     * @param entreprise Nom de l'entreprise associée à l'action simple.
+     * @param domaine Domaine de l'action simple.
+     * @param libelle Le libellé de l'action simple.
+     */
+    public ActionSimple(int id, String entreprise, String domaine, String libelle) {
         super(libelle);
-        this.Id = Id;
-        this.Entreprise = Entreprise;
-        this.Domaine = Domaine;
-        // init spécifique
-        this.mapCours = new HashMap();
+        this.id = id;
+        this.entreprise = entreprise;
+        this.domaine = domaine;
+        this.listeCours = new ArrayList();
     }
+
+    // Méthode pour enregistrer les valeurs de cours
 
     /**
-     *
-     * @param j
-     * @param v
-     * enrg possible si pas de cours pour ce jour
+     * Enregistre une nouvelle valeur de cours pour cette action simple.
+     * @param v La valeur de cours à enregistrer.
      */
-    public void enrgCours(Jour j, float v) {
-        if(this.mapCours.containsKey(j) == false) {
-            this.mapCours.put(j, new Cours(j, v));
-        } else {
-        }
+    public void enrgCours(Double v) {
+        this.listeCours.add(v);
     }
 
+    // Méthodes d'accès (Getters et Setters) pour les attributs
+
+    /**
+     * Obtient l'identifiant de l'action simple.
+     * @return L'identifiant de l'action simple.
+     */
     public int getId() {
-        return Id;
+        return id;
     }
 
+    /**
+     * Modifie l'identifiant de l'action simple.
+     * @param Id Le nouvel identifiant de l'action simple.
+     */
     public void setId(int Id) {
-        this.Id = Id;
+        this.id = Id;
     }
 
+    /**
+     * Obtient le nom de l'entreprise associée à l'action simple.
+     * @return Le nom de l'entreprise associée à l'action simple.
+     */
     public String getEntreprise() {
-        return Entreprise;
+        return entreprise;
     }
 
+    /**
+     * Modifie le nom de l'entreprise associée à l'action simple.
+     * @param Entreprise Le nouveau nom de l'entreprise.
+     */
     public void setEntreprise(String Entreprise) {
-        this.Entreprise = Entreprise;
+        this.entreprise = Entreprise;
     }
 
+    /**
+     * Obtient le domaine de l'action simple.
+     * @return Le domaine de l'action simple.
+     */
     public String getDomaine() {
-        return Domaine;
+        return domaine;
     }
 
+    /**
+     * Modifie le domaine de l'action simple.
+     * @param Domaine Le nouveau domaine de l'action simple.
+     */
     public void setDomaine(String Domaine) {
-        this.Domaine = Domaine;
-    }
-
-    public Map<Jour, Cours> getMapCours() {
-        return mapCours;
-    }
-
-    public void setMapCours(Map<Jour, Cours> mapCours) {
-        this.mapCours = mapCours;
+        this.domaine = Domaine;
     }
 
     /**
-     *
-     * @param j
-     * pour un jour donnee retourne la valeur 
-     * @return valeur 
+     * Obtient la liste des valeurs de cours associées à l'action simple.
+     * @return La liste des valeurs de cours.
      */
-    public float valeur(Jour j) {
-        if(this.mapCours.containsKey(j) == true)
-            return this.mapCours.get(j).getValeur();
-        else 
-            return 0; // definition d'une constante possible
+    public List<Double> getListeCours() {
+        return listeCours;
     }
-  
-    // encapsulation de la définition de la classe Cours
-    private class Cours {
+
     /**
-     *
-     * @param jour
-     * la propriete du jour
+     * Modifie la liste des valeurs de cours associées à l'action simple.
+     * @param listeCours La nouvelle liste des valeurs de cours.
      */
-        private final Jour jour;
+    public void setListeCours(List<Double> listeCours) {
+        this.listeCours = listeCours;
+    }
 
-     /**
-     *
-     * @param valeur
-     * la valeur du cours
-     */
-        private final float valeur;
+    // Méthodes pour obtenir des informations sur les valeurs de cours
 
-        /**
-     *
-     * 
-     * @return valeur
-     * Constructeur d'une action composee
+    /**
+     * Obtient la valeur de cours pour un jour spécifique.
+     * @param indice L'indice représentant le jour 
+     * pour lequel on souhaite obtenir la valeur.
+     * @return La valeur de cours pour le jour spécifié.
      */
-        public float getValeur() {
-            return valeur;
-        }
+    public double valeur(int indice) {
+        return this.listeCours.get(indice);
+    }
 
-     /**
-     *
-     * @return Jour
-     * Constructeur d'une action composee
+    /**
+     * Obtient la dernière valeur de cours enregistrée.
+     * @return La dernière valeur de cours enregistrée.
      */
-        public Jour getJour() {
-            return jour;
-        }
+    public double dernier_valeur() {
+        return this.listeCours.get(this.listeCours.size()-1);
+    }
 
-        /**
-     *
-     * @param jour
-     * @param valeur
-     * Constructeur d'un cours
+    // Méthode pour mettre à jour les valeurs de cours
+
+    /**
+     * Met à jour les valeurs de cours en générant 
+     * une nouvelle valeur aléatoire entre 2 et -2,
+     * puis l'ajoute à la dernière valeur enregistrée.
      */
-        public Cours(Jour jour, float valeur) {
-            this.jour = jour;
-            this.valeur = valeur;
-        }
+    public void Update(){
+        double dernier_value = this.listeCours.get(this.listeCours.size()-1);
+        this.listeCours.add(dernier_value + (Math.random() * 4) - 2);
     }
 }
