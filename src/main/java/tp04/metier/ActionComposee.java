@@ -22,21 +22,22 @@ public class ActionComposee extends Action {
         this.mapPanier = new HashMap();
     }
     
+    public ActionComposee(String libelle, String entreprise, String domaine) {
+        // Action simple initialisée comme 1 action
+        super(libelle, entreprise, domaine);
+    }
+    
     public void enrgComposition(ActionSimple as, float pourcentage) {
         this.mapPanier.put(as, pourcentage);
     }
-
+    
     @Override
-    public float valeur(Jour j) {
-        float valeur;
-        
-        valeur = 0;
-        for(ActionSimple as : this.mapPanier.keySet()) {
-            valeur = valeur + (as.valeur(j) * this.mapPanier.get(as));
-        }
-        
-        return valeur;
+    public float getValeur() {
+        long value = 0;
+        this.mapPanier.forEach((ac, pr) -> value += Marche.getInstance().getActions().get(ac) * pr);
+        return value;
     }
     
-    
+    @Override
+    public void addValeur() {};
 }

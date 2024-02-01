@@ -7,6 +7,7 @@ package tp04.metier;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 /**
  *
@@ -14,7 +15,8 @@ import java.util.Map;
  */
 public class Portefeuille {
     
-    Map<Action, LignePortefeuille> mapLignes;
+    Map<Action, List<Integer> > actions;
+    Map<Ordre> ordres;
     
     private class LignePortefeuille {
         

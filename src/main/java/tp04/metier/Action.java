@@ -7,14 +7,31 @@
 package tp04.metier;
 
 import java.util.Objects;
+import java.util.List;
 
 /**
  *
- * @author perussel
+ * @author Mohamed abderramhane
  */
 public abstract class Action {
     
     private String libelle;
+    private String entreprise;
+    private String domaine;
+    private List<Float> cours;
+
+    public Action(String libelle, String entreprise, String domaine) {
+        this.libelle = libelle;
+        this.entreprise = entreprise;
+        this.domaine = domaine;
+    }
+    
+    public Action(String libelle) {
+        this.libelle = libelle;
+        this.entreprise = "";
+        this.domaine = "";
+    }
+    
 
     /**
      * Get the value of libelle
@@ -24,33 +41,66 @@ public abstract class Action {
     public String getLibelle() {
         return libelle;
     }
-
-    public Action(String libelle) {
+    
+    /**
+     * Set the value of libelle
+     *
+     * @param libelle new value of libelle
+     */
+    public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
-
-    public abstract float valeur(Jour j);
     
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.libelle);
-        return hash;
+    /**
+     * Get the value of entreprise
+     *
+     * @return the value of entreprise
+     */
+    public String getEntreprise() {
+        return this.entreprise;
     }
+    
+    /**
+     * Set the value of entreprise
+     *
+     * @param entreprise new value of entreprise
+     */
+    public void setEntreprise(String entreprise) {
+        this.entreprise = entreprise;
+    }
+    
+    /**
+     * Get the value of domaine
+     *
+     * @return the value of domaine
+     */
+    public String getDomaine() {
+        return libelle;
+    }
+    
+    /**
+     * Set the value of domaine
+     *
+     * @param domaine new value of domaine
+     */
+    public void setDomaine(String domaine) {
+        this.domaine = domaine;
+    }
+    
+    public abstract float getValeur();
+    public abstract float getValeurJour(int jour);
+    public abstract void addValeur();
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
+        if (this.getClass() == obj.getClass()) {
+            if (this.domaine.equals(obj.domaine) & 
+                this.libelle.equals(obj.libelle) & 
+                this.domaine.equals(obj.domaine)) {
+                return true;
+            }
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Action other = (Action) obj;
-        if (!Objects.equals(this.libelle, other.libelle)) {
-            return false;
-        }
-        return true;
+        return false;
     }
 
     public String toString() {
