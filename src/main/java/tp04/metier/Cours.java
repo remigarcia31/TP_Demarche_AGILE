@@ -11,5 +11,5 @@ package tp04.metier;
  * @author perussel
  */
 public class Cours {
-    
+
 }
