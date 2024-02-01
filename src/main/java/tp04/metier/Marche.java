@@ -17,6 +17,7 @@ package tp04.metier;
 
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import tp04.metier.Action;
 import tp04.metier.ActionSimple;
@@ -25,10 +26,13 @@ import tp04.metier.ActionSimple;
  * @author Yanpei
  */
 public class Marche {
-    private List<Action> ActionList;
-    private List<Order> OrderList;
+    private Map<String,Integer> ActionQteMap;
+    private Map<String,Integer> ActionPrixMap;
+    private List<Order> OrderAchatList;
+    private List<Order> OrderVenteList;
     private List<Order> ValidOrderList;
     private List<ActionSimple> ActionSimpleList;
+    private List<ActionComposee> ActionComposeeList;
     private Jour j;
     
     private static final Marche instance;
@@ -36,13 +40,18 @@ public class Marche {
         instance = new Marche();
     }
 
-    private Marche(List<Action> ActionList, List<Order> OrderList, List<Order> ValidOrderList, List<ActionSimple> ActionSimpleList, Jour j) {
-        this.ActionList = ActionList;
-        this.OrderList = OrderList;
+    public Marche(Map<String, Integer> ActionQteMap, Map<String, Integer> ActionPrixMap, List<Order> OrderAchatList, List<Order> OrderVenteList, List<Order> ValidOrderList, List<ActionSimple> ActionSimpleList, List<ActionComposee> ActionComposeeList, Jour j) {
+        this.ActionQteMap = ActionQteMap;
+        this.ActionPrixMap = ActionPrixMap;
+        this.OrderAchatList = OrderAchatList;
+        this.OrderVenteList = OrderVenteList;
         this.ValidOrderList = ValidOrderList;
         this.ActionSimpleList = ActionSimpleList;
+        this.ActionComposeeList = ActionComposeeList;
         this.j = j;
     }
+
+
     
     public static Marche getintance(){
         return instance;
@@ -51,22 +60,45 @@ public class Marche {
     private Marche() {
         
     }
-    
 
-    public List<Action> getActionList() {
-        return ActionList;
+    public Map<String, Integer> getActionQteMap() {
+        return ActionQteMap;
     }
 
-    public void setActionList(List<Action> ActionList) {
-        this.ActionList = ActionList;
+    public void setActionQteMap(Map<String, Integer> ActionQteMap) {
+        this.ActionQteMap = ActionQteMap;
     }
 
-    public List<Order> getOrderList() {
-        return OrderList;
+    public Map<String, Integer> getActionPrixMap() {
+        return ActionPrixMap;
     }
 
-    public void setQrderlist(List<Order> Orderlist) {
-        this.OrderList = OrderList;
+    public void setActionPrixMap(Map<String, Integer> ActionPrixMap) {
+        this.ActionPrixMap = ActionPrixMap;
+    }
+
+    public List<Order> getOrderAchatList() {
+        return OrderAchatList;
+    }
+
+    public void setOrderAchatList(List<Order> OrderAchatList) {
+        this.OrderAchatList = OrderAchatList;
+    }
+
+    public List<Order> getOrderVenteList() {
+        return OrderVenteList;
+    }
+
+    public void setOrderVenteList(List<Order> OrderVenteList) {
+        this.OrderVenteList = OrderVenteList;
+    }
+
+    public List<ActionComposee> getActionComposeeList() {
+        return ActionComposeeList;
+    }
+
+    public void setActionComposeeList(List<ActionComposee> ActionComposeeList) {
+        this.ActionComposeeList = ActionComposeeList;
     }
 
     public List<Order> getValidOrderList() {
@@ -94,19 +126,66 @@ public class Marche {
     }
     
     public void addOrder(Order o){
-        this.OrderList.add(o);
-    }
-    
-    public void addAction(Action a){
-        this.ActionList.add(a);
-        if (a instanceof ActionSimple) {
-            this.ActionSimpleList.add((ActionSimple) a);
+        if (o.estAchat){
+            this.OrderAchatList.add(o)
+        }
+        else {
+            this.OrderVenteList.add(o)
         }
     }
     
+    public void addAction(Action a, int q){
+        this.ActionQteMap.put(a.getLibelle(), q);
+        this.ActionPrixMap.put(a.getLibelle(), a.dernier_valeur());
+        if (a instanceof ActionSimple actionSimple) {
+            this.ActionSimpleList.add(actionSimple);
+        }
+        if (a instanceof ActionComposee actionComposee) {
+            this.ActionComposeeList.add(actionComposee);
+        }
+    }
     
+    public void EchangeAction(Action a, int q){
+        this.ActionQteMap.put(a, this.ActionQteMap.get(a)+q);
+    }
+    
+    public void UpdatePrix(){
+        for (ActionSimple as : ActionSimpleList){
+        as.Update();
+    } 
+        for (ActionComposee as : ActionComposeeList){
+        as.Update();
+    } 
+    }
+    
+    public void validerOrdre(Ordre o){
+        if (o.estAchat){
+            double m=o.portefeuille.obtenirSolde();
+            int q = o.portefeuille.obtenirMapAction(o.getAction);
+            double delta=o.getQuantite()*ActionPrixMap(o.getAction().getLibelle());
+            o.portefeuille.definirSolde(m-delta);
+            o.portefeuille.definirMapAction();
+            // attendre modification dans la classe portefeuille
+        }
+        else{
+            double m=o.portefeuille.obtenirSolde();
+            
+            double delta=o.getQuantite()*ActionPrixMap(o.getAction().getLibelle());
+            o.portefeuille.definirSolde(m+delta);
+            o.portefeuille.definirSolde(m+delta);
+        }
+    }
     
     public void traiterOrdre(Ordre o){
-        
+        if (o.estAuMarche){
+            this.validerOrdre(o);
+        }
+        else{
+            if (o.estAchat){
+                if Action
+            }
+        }
     }
+    
+   
 }
