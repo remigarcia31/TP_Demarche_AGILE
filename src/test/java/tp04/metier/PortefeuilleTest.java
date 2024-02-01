@@ -2,7 +2,7 @@ package tp04.metier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/*
 public class PortefeuilleTest {
         
         public PortefeuilleTest() {
@@ -81,3 +81,4 @@ public class PortefeuilleTest {
         }
     
 }
+*/

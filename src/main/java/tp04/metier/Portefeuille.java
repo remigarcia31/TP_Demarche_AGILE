@@ -126,7 +126,7 @@ public final class Portefeuille {
      * @param action action à enlever du portefeuille.
      * @param quantite quantité de l'action que nous souhaitons enlever.
      */
-    public void enleverQuantiteAction(final Action action, final int quantite) {
+/*    public void enleverQuantiteAction(final Action action, final int quantite) {
         for (Action actionPortefeuille : this.listeAction) {
             if (actionPortefeuille.equals(action)) {
                 actionPortefeuille.enleverQuantite(quantite);
@@ -135,7 +135,7 @@ public final class Portefeuille {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * Affiche les détails du portefeuille : le nom du Proprietaire, le solde, 
