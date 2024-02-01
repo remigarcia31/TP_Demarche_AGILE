@@ -15,12 +15,31 @@ import java.util.Map;
  */
 public class ActionSimple extends Action {
 
+    
+    private int Id;
+    
+    private String Entreprise;
+    
+    private String Domaine;
     // attribut lien
-    private Map<Jour, Cours> mapCours;
+
+    /**
+     *
+     */
+    public Map<Jour, Cours> mapCours;
     // constructeur
+
     public ActionSimple(String libelle) {
+        super(libelle);
+    }
+    
+    public ActionSimple(int Id, String Entreprise, String Domaine
+            , String libelle) {
         // Action simple initialisée comme 1 action
         super(libelle);
+        this.Id = Id;
+        this.Entreprise = Entreprise;
+        this.Domaine = Domaine;
         // init spécifique
         this.mapCours = new HashMap();
     }
@@ -36,6 +55,38 @@ public class ActionSimple extends Action {
             this.mapCours.put(j, new Cours(j, v));
         } else {
         }
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+
+    public String getEntreprise() {
+        return Entreprise;
+    }
+
+    public void setEntreprise(String Entreprise) {
+        this.Entreprise = Entreprise;
+    }
+
+    public String getDomaine() {
+        return Domaine;
+    }
+
+    public void setDomaine(String Domaine) {
+        this.Domaine = Domaine;
+    }
+
+    public Map<Jour, Cours> getMapCours() {
+        return mapCours;
+    }
+
+    public void setMapCours(Map<Jour, Cours> mapCours) {
+        this.mapCours = mapCours;
     }
 
     /**
@@ -90,7 +141,7 @@ public class ActionSimple extends Action {
      *
      * @param jour
      * @param valeur
-     * Constructeur d'une action composee
+     * Constructeur d'un cours
      */
         public Cours(Jour jour, float valeur) {
             this.jour = jour;
