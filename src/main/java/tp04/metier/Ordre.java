@@ -18,12 +18,17 @@ package tp04.metier;
 /**
  *
  * @author gaboche
+ * 
+ * 
+ */
+
+/**
+ * Représente un ordre qui teste le marché (prix quantité) pour permettre la réalisation d'une transaction.
  */
 public class Ordre {
-    
+
     /**
-     * L'utilisateur crée un ordre qui teste le marché (prix quantité) pour 
-     * permettre la réalisation d'une transaction
+     * Enumération des statuts possibles d'un ordre.
      */
     enum Statut {
         OUVERT,
@@ -31,200 +36,260 @@ public class Ordre {
         REFUSER
     };
 
+    /** Le statut actuel de l'ordre. */
     private Statut statut;
+
+    /** Le prix unitaire de l'ordre. */
     private long prixUnit;
     
-    private boolean estAchat; // achat vente
+    /** Indique s'il s'agit d'un ordre d'achat (true) ou de vente (false). */
+    private boolean estAchat;
+
+    /** L'action associée à l'ordre. */
     private Action action;
+
+    /** La quantité de l'ordre. */
     private int quantite;
+
+    /** La date d'ouverture de l'ordre. */
     private String dateOuverture;
+
+    /** La date de clôture de l'ordre. */
     private String dateCloture;
+
+    /** Le portefeuille associé à l'ordre. */
     private Portefeuille portefeuille;
+
+    /** Indique si l'ordre est au marché (true) ou en limite (false). */
     private boolean estAuMarche;
 
-    public Ordre (
-            boolean estAchat, Action action,
-            long prixUnit, int quantite, 
-            String dateCloture, Portefeuille portefeuille,
-            boolean estAuMarche
-    )
-    {
-        this.statut = statut.OUVERT;
+    /**
+     * Constructeur de la classe Ordre pour créer un ordre limite une vente
+     * génerera un ordre avec prix plancher un achat génerera un aordre avec
+     * prix plafond.
+     *
+     * @param estAchat      true si c'est un ordre d'achat, false si c'est un ordre de vente
+     * @param action        l'action associée à l'ordre
+     * @param prixUnit      le prix unitaire de l'ordre
+     * @param quantite      la quantité de l'ordre
+     * @param dateCloture   la date de clôture de l'ordre
+     * @param portefeuille  le portefeuille associé à l'ordre
+     */
+    public Ordre(
+            boolean estAchat,
+            Action action,
+            long prixUnit,
+            int quantite, 
+            String dateCloture,
+            Portefeuille portefeuille
+    ) {
+        this.statut = Statut.OUVERT;
         this.prixUnit = prixUnit;
         this.estAchat = estAchat;
         this.action = action;
         this.quantite = quantite;
         this.dateCloture = dateCloture; 
         this.portefeuille = portefeuille;
-        this.estAuMarche = estAuMarche;
+        this.estAuMarche = false;
+    }
+
+    /**
+     * Constructeur de la classe Ordre pour créer un ordre au prix du marché
+     *
+     * @param estAchat      true si c'est un ordre d'achat, false si c'est un ordre de vente
+     * @param action        l'action associée à l'ordre
+     * @param quantite      la quantité de l'ordre
+     * @param dateCloture   la date de clôture de l'ordre
+     * @param portefeuille  le portefeuille associé à l'ordre
+     */
+    public Ordre(
+            boolean estAchat,
+            Action action,
+            int quantite, 
+            String dateCloture,
+            Portefeuille portefeuille
+    ) {
+        this.statut = Statut.OUVERT;
+        this.prixUnit = Marche(action.get.prix());
+        this.estAchat = estAchat;
+        this.action = action;
+        this.quantite = quantite;
+        this.dateCloture = dateCloture; 
+        this.portefeuille = portefeuille;
+        this.estAuMarche = true;
     }
     
     /**
-     * Get the value of statut
+     * Obtient le statut de l'ordre.
      *
-     * @return the value of statut
+     * @return le statut de l'ordre
      */
     public Statut getStatut() {
         return this.statut;
     }
 
     /**
-     * Set the value of statut
+     * Modifie le statut de l'ordre.
      *
-     * @param statut new value of statut
+     * @param statut le nouveau statut de l'ordre
      */
     public void setStatut(Statut statut) {
         this.statut = statut;
     }
-    
+
     /**
-     * Get the value of prixUnit
+     * Obtient le prix unitaire de l'ordre.
      *
-     * @return the value of prixUnit
+     * @return le prix unitaire de l'ordre
      */
     public long getPrixUnit() {
         return this.prixUnit;
     }
 
     /**
-     * Set the value of prixUnit
+     * Modifie le prix unitaire de l'ordre.
      *
-     * @param prixUnit new value of prixUnit
+     * @param prixUnit le nouveau prix unitaire de l'ordre
      */
     public void setPrixUnit(long prixUnit) {
         this.prixUnit = prixUnit;
     }
-    
+
     /**
-     * Get the value of estAchat
+     * Obtient si l'ordre est un ordre d'achat ou de vente.
      *
-     * @return the value of estAchat
+     * @return true si c'est un ordre d'achat, false si c'est un ordre de vente
      */
     public boolean getEstAchat() {
         return this.estAchat;
     }
 
     /**
-     * Set the value of estAchat
+     * Modifie si l'ordre est un ordre d'achat ou de vente.
      *
-     * @param estAchat new value of estAchat
+     * @param estAchat true si c'est un ordre d'achat, false si c'est un ordre de vente
      */
-    public void setPrix(boolean estAchat) {
+    public void setEstAchat(boolean estAchat) {
         this.estAchat = estAchat;
     }
-    
+
     /**
-     * Get the value of action
+     * Obtient l'action associée à l'ordre.
      *
-     * @return the value of action
+     * @return l'action associée à l'ordre
      */
     public Action getAction() {
         return this.action;
     }
 
     /**
-     * Set the value of action
+     * Modifie l'action associée à l'ordre.
      *
-     * @param action new value of action
+     * @param action la nouvelle action associée à l'ordre
      */
     public void setAction(Action action) {
         this.action = action;
     }
-    
+
     /**
-     * Get the value of quantite
+     * Obtient la quantité de l'ordre.
      *
-     * @return the value of quantite
+     * @return la quantité de l'ordre
      */
     public int getQuantite() {
         return this.quantite;
     }
 
     /**
-     * Set the value of quantite
+     * Modifie la quantité de l'ordre.
      *
-     * @param quantite new value of quantite
+     * @param quantite la nouvelle quantité de l'ordre
      */
     public void setQuantite(int quantite) {
         this.quantite = quantite;
     }
-    
+
     /**
-     * Get the value of dateOuverture
+     * Obtient la date d'ouverture de l'ordre.
      *
-     * @return the value of dateOuverture
+     * @return la date d'ouverture de l'ordre
      */
     public String getDateOuverture() {
         return this.dateOuverture;
     }
 
     /**
-     * Set the value of dateOuverture
+     * Modifie la date d'ouverture de l'ordre.
      *
-     * @param dateOuverture new value of dateOuverture
+     * @param dateOuverture la nouvelle date d'ouverture de l'ordre
      */
     public void setDateOuverture(String dateOuverture) {
         this.dateOuverture = dateOuverture;
     }
-    
+
     /**
-     * Get the value of dateCloture
+     * Obtient la date de clôture de l'ordre.
      *
-     * @return the value of dateCloture
+     * @return la date de clôture de l'ordre
      */
-    public String getdateCloture() {
+    public String getDateCloture() {
         return this.dateCloture;
     }
 
     /**
-     * Set the value of dateCloture
+     * Modifie la date de clôture de l'ordre.
      *
-     * @param dateCloture new value of dateCloture
+     * @param dateCloture la nouvelle date de clôture de l'ordre
      */
     public void setDateCloture(String dateCloture) {
         this.dateCloture = dateCloture;
-    }   
+    }
 
     /**
-     * Get the value of portefeuille
+     * Obtient le portefeuille associé à l'ordre.
      *
-     * @return the value of portefeuille
+     * @return le portefeuille associé à l'ordre
      */
     public Portefeuille getPortefeuille() {
         return this.portefeuille;
     }
 
     /**
-     * Set the value of portefeuille
+     * Modifie le portefeuille associé à l'ordre.
      *
-     * @param portefeuille new value of portefeuille
+     * @param portefeuille le nouveau portefeuille associé à l'ordre
      */
     public void setPortefeuille(Portefeuille portefeuille) {
         this.portefeuille = portefeuille;
-    } 
+    }
 
     /**
-     * Get the value of estAuMarche
+     * Obtient si l'ordre est au marché ou en limite.
      *
-     * @return the value of typeOrdre
+     * @return true si l'ordre est au marché, false s'il est en limite
      */
     public boolean getEstAuMarche() {
         return this.estAuMarche;
     }
 
     /**
-     * Set the value of estAuMarche
+     * Modifie si l'ordre est au marché ou en limite.
      *
-     * @param estAuMarche new value of estAuMarche
+     * @param estAuMarche true si l'ordre est au marché, false s'il est en limite
      */
     public void setEstAuMarche(boolean estAuMarche) {
         this.estAuMarche = estAuMarche;
-    } 
+    }
 
+    /**
+     * Obtient une représentation textuelle de l'ordre.
+     *
+     * @return une représentation textuelle de l'ordre
+     */
     @Override
     public String toString() {
         return String.join("\n"
-                , (this.estAchat ? "Achat"  : "Vente") +  "de" +this.action.toString()
+                , (this.estAchat ? "Achat"  : "Vente") +  " de " + this.action.toString()
                 , "Statut de l'ordre : " + this.statut
                 , "Marché/limit ?    : " + (this.estAuMarche ? "Marché"  : "Limit")
                 , "Prix Unitaire     : " + this.prixUnit
@@ -233,8 +298,4 @@ public class Ordre {
                 , "Date cloture      : " + this.dateCloture 
        );
     }
-    
-    
-    
 }
- 
