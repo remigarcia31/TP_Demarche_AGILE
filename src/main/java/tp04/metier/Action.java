@@ -65,6 +65,12 @@ public abstract class Action {
         this.libelle = Libelle;
     }
 
+    /**
+     * Elle est abstraite pour s'assurer pour qu'elle soit imlementee partout.
+     * @return derniere valeur
+     */
+    public abstract double derniere_valeur();
+
     // Méthodes pour la gestion des comparaisons et la représentation
 
     /**

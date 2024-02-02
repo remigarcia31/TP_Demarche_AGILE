@@ -106,6 +106,32 @@ public class ActionComposee extends Action {
         }
         return valeur;
     }
+    /**
+ * Calcule et retourne la dernière valeur de l'action composée, 
+ * mise à jour avec les dernières valeurs des actions simples.
+ * en utilisant les dernières valeurs enregistrées des actions simples 
+ * dans la composition.
+ * Elle calcule ensuite la valeur totale de l'action composée en combinant 
+ * les valeurs des actions simples
+ * en utilisant les pourcentages associés.
+ * @return La dernière valeur de l'action composée.
+ */
+    @Override
+    public double derniere_valeur() {
+
+
+    // Initialise la valeur à 0.
+    Double valeur = Double.valueOf(0);
+
+    // Calcule la valeur totale de l'action composée en combinant 
+    //les valeurs des actions simples avec les pourcentages.
+    for (ActionSimple as : this.mapPanier.keySet()) {
+        valeur = valeur + (as.derniere_valeur() * this.mapPanier.get(as));
+    }
+    
+    return valeur; // Retourne la valeur totale de l'action composée.
+}
+
 
     // Méthode pour mettre à jour les pourcentages de composition
 
@@ -116,7 +142,7 @@ public class ActionComposee extends Action {
      */
     public void Update() {
         for (ActionSimple as : this.mapPanier.keySet()) {
-            this.mapPanier.put(as, as.dernier_valeur());
+            as.Update();
         }
     }
 }

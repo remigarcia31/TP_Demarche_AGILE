@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Classe représentant une action simple héritant de la classe Action.
  * Cette classe stocke des informations spécifiques à une action simple,
- * telles que son identifiant, le nom de l'entreprise associée, le domaine, 
+ * telles que son identifiant, le nom de l'entreprise associée, le domaine,
  * et les valeurs de cours enregistrées.
  * Elle offre des méthodes pour enregistrer de nouvelles valeurs de cours,
  * obtenir des informations sur l'action,
@@ -64,7 +64,7 @@ public class ActionSimple extends Action {
     public ActionSimple(String libelle) {
         super(libelle);
     }
-    
+
     /**
      * Constructeur avec des paramètres pour initialiser 
      * les attributs spécifiques de l'action simple.
@@ -173,7 +173,8 @@ public class ActionSimple extends Action {
      * Obtient la dernière valeur de cours enregistrée.
      * @return La dernière valeur de cours enregistrée.
      */
-    public double dernier_valeur() {
+    @Override
+    public double derniere_valeur() {
         return this.listeCours.get(this.listeCours.size()-1);
     }
 
