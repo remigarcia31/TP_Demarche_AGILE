@@ -1,5 +1,5 @@
 /*
- * Copyright 2024
+ * Copyright 2024 Remi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,35 +16,36 @@
 package tp04.metier;
 
 import java.util.Map;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author M2 IDA
+ * @author Remi
  */
 public class ActionComposeeTest {
     
     public ActionComposeeTest() {
     }
     
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
+        ActionComposee actc = new ActionComposee("test");
     }
     
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
     }
     
-    @Before
+    @BeforeEach
     public void setUp() {
     }
     
-    @After
+    @AfterEach
     public void tearDown() {
     }
 
@@ -99,20 +100,6 @@ public class ActionComposeeTest {
         ActionComposee instance = null;
         double expResult = 0.0;
         double result = instance.valeur(j);
-        assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of derniere_valeur method, of class ActionComposee.
-     */
-    @Test
-    public void testDerniere_valeur() {
-        System.out.println("derniere_valeur");
-        ActionComposee instance = null;
-        double expResult = 0.0;
-        double result = instance.derniere_valeur();
         assertEquals(expResult, result, 0);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
