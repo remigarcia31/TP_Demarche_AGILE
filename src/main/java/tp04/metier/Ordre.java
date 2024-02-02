@@ -40,7 +40,7 @@ public class Ordre {
     private Statut statut;
 
     /** Le prix unitaire de l'ordre. */
-    private long prixUnit;
+    private double prixUnit;
     
     /** Indique s'il s'agit d'un ordre d'achat (true) ou de vente (false). */
     private boolean estAchat;
@@ -78,7 +78,7 @@ public class Ordre {
     public Ordre(
             boolean estAchat,
             Action action,
-            long prixUnit,
+            double prixUnit,
             int quantite, 
             String dateCloture,
             Portefeuille portefeuille
@@ -110,7 +110,7 @@ public class Ordre {
             Portefeuille portefeuille
     ) {
         this.statut = Statut.OUVERT;
-        this.prixUnit = Marche(action.get.prix());
+        this.prixUnit = action.derniere_valeur;
         this.estAchat = estAchat;
         this.action = action;
         this.quantite = quantite;
@@ -142,7 +142,7 @@ public class Ordre {
      *
      * @return le prix unitaire de l'ordre
      */
-    public long getPrixUnit() {
+    public double getPrixUnit() {
         return this.prixUnit;
     }
 
