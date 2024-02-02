@@ -59,56 +59,56 @@ public class Marche {
         return actionQteMap;
     }
 
-    public void setActionQteMap(Map<String, Integer> ActionQteMap) {
-        this.actionQteMap = ActionQteMap;
+    public void setActionQteMap(Map<String, Integer> actionQteMap) {
+        this.actionQteMap = actionQteMap;
     }
 
     public Map<String, Double> getActionPrixMap() {
         return actionPrixMap;
     }
 
-    public void setActionPrixMap(Map<String, Double> ActionPrixMap) {
-        this.actionPrixMap = ActionPrixMap;
+    public void setActionPrixMap(Map<String, Double> actionPrixMap) {
+        this.actionPrixMap = actionPrixMap;
     }
 
     public List<Ordre> getOrderAchatList() {
         return orderAchatList;
     }
 
-    public void setOrderAchatList(List<Ordre> OrderAchatList) {
-        this.orderAchatList = OrderAchatList;
+    public void setOrderAchatList(List<Ordre> orderAchatList) {
+        this.orderAchatList = orderAchatList;
     }
 
     public List<Ordre> getOrderVenteList() {
         return orderVenteList;
     }
 
-    public void setOrderVenteList(List<Ordre> OrderVenteList) {
-        this.orderVenteList = OrderVenteList;
+    public void setOrderVenteList(List<Ordre> orderVenteList) {
+        this.orderVenteList = orderVenteList;
     }
 
     public List<ActionComposee> getActionComposeeList() {
         return actionComposeeList;
     }
 
-    public void setActionComposeeList(List<ActionComposee> ActionComposeeList) {
-        this.actionComposeeList = ActionComposeeList;
+    public void setActionComposeeList(List<ActionComposee> actionComposeeList) {
+        this.actionComposeeList = actionComposeeList;
     }
 
     public List<Ordre> getValidOrderList() {
         return validOrderList;
     }
 
-    public void setValidOrderList(List<Ordre> ValidOrderList) {
-        this.validOrderList = ValidOrderList;
+    public void setValidOrderList(List<Ordre> validOrderList) {
+        this.validOrderList = validOrderList;
     }
 
     public List<ActionSimple> getActionSimpleList() {
         return actionSimpleList;
     }
 
-    public void setActionSimpleList(List<ActionSimple> ActionSimpleList) {
-        this.actionSimpleList = ActionSimpleList;
+    public void setActionSimpleList(List<ActionSimple> actionSimpleList) {
+        this.actionSimpleList = actionSimpleList;
     }
 
     public int getJ() {
