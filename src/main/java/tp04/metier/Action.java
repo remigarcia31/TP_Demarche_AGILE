@@ -71,19 +71,6 @@ public abstract class Action {
      */
     public abstract double derniere_valeur();
 
-    // Méthodes pour la gestion des comparaisons et la représentation
-
-    /**
-     * Calcule et retourne le code de hachage de l'action.
-     * @return Le code de hachage de l'action.
-     */
-    @Override
-    public int hashCode() {
-        int hash;
-        hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.libelle);
-        return hash;
-    }
 
     /**
      * Compare l'objet actuel avec un autre objet 

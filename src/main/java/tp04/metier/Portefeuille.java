@@ -109,7 +109,7 @@ public class Portefeuille {
         Action action,
         double prixUnit,
         int quantite, 
-        String dateCloture,
+        int dateCloture,
         Portefeuille portefeuille)
     {
         boolean validite = true;
@@ -138,11 +138,11 @@ public class Portefeuille {
         boolean estAchat,
         Action action,
         int quantite, 
-        String dateCloture,
+        int dateCloture,
         Portefeuille portefeuille)
     {
         boolean validite = true;
-        double total = action.derniere_valeur * quantite;
+        double total = action.derniere_valeur() * quantite;
         
         if (estAchat) validite = testSolde(total);
         if (!estAchat) validite = testQuantiteAction(quantite, action);
@@ -150,7 +150,13 @@ public class Portefeuille {
         if (validite) {
             System.out.println("ordre ajouté au marché");
             this.solde -= total ;
-            Marche.getInstance().addOrder(new Ordre(estAchat, action, prixUnit, quantite, dateCloture, this));// Créé un ordre en vérifiant que le solde est suffisant et que le nombre d'actions            
+            Marche.getInstance().addOrder(new Ordre(
+                    estAchat,
+                    action,
+                    action.derniere_valeur(),
+                    quantite,
+                    dateCloture,
+                    this));// Créé un ordre en vérifiant que le solde est suffisant et que le nombre d'actions            
         }
     }
     

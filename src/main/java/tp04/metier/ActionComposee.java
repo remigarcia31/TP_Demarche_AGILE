@@ -33,8 +33,6 @@ import java.util.Map;
  */
 public class ActionComposee extends Action {
 
-    // Attributs
-
     /**
      * Liste d'actions simples associées à des pourcentages de composition dans
      * l'action composée.
@@ -107,15 +105,15 @@ public class ActionComposee extends Action {
         return valeur;
     }
     /**
- * Calcule et retourne la dernière valeur de l'action composée, 
- * mise à jour avec les dernières valeurs des actions simples.
- * en utilisant les dernières valeurs enregistrées des actions simples 
- * dans la composition.
- * Elle calcule ensuite la valeur totale de l'action composée en combinant 
- * les valeurs des actions simples
- * en utilisant les pourcentages associés.
- * @return La dernière valeur de l'action composée.
- */
+    * Calcule et retourne la dernière valeur de l'action composée, 
+    * mise à jour avec les dernières valeurs des actions simples.
+    * en utilisant les dernières valeurs enregistrées des actions simples 
+    * dans la composition.
+    * Elle calcule ensuite la valeur totale de l'action composée en combinant 
+    * les valeurs des actions simples
+    * en utilisant les pourcentages associés.
+    * @return La dernière valeur de l'action composée.
+    */
     @Override
     public double derniere_valeur() {
 
@@ -132,8 +130,6 @@ public class ActionComposee extends Action {
     return valeur; // Retourne la valeur totale de l'action composée.
 }
 
-
-    // Méthode pour mettre à jour les pourcentages de composition
 
     /**
      * Met à jour les pourcentages de composition en utilisant 

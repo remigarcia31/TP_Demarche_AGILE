@@ -36,34 +36,34 @@ public class Run {
         ActionSimple spr = new ActionSimple("SPR", "Sopra Steria", "services numérique");
         ActionSimple cap = new ActionSimple("CAP", "Capgemini", "services numérique");
         
-        ActionComposee ar = new ActionComposee("AR", "", "aero");
-        ar.enrgComposition(abs, 0.8f);
-        ar.enrgComposition(tas, 0.2f);
+        ActionComposee ar = new ActionComposee("AR");
+        ar.enrgComposition(abs, 0.8d);
+        ar.enrgComposition(tas, 0.2d);
         
-        ActionComposee fi = new ActionComposee("FI", "", "finance");
-        ar.enrgComposition(ats, 0.08f);
-        ar.enrgComposition(spr, 0.5f);
-        ar.enrgComposition(cap, 0.42f);
+        ActionComposee fi = new ActionComposee("FI");
+        ar.enrgComposition(ats, 0.08d);
+        ar.enrgComposition(spr, 0.5d);
+        ar.enrgComposition(cap, 0.42d);
         
-        ActionComposee sn = new ActionComposee("SN", "", "Services numériques");
-        ar.enrgComposition(abs, 0.8f);
-        ar.enrgComposition(tas, 0.2f);
+        ActionComposee sn = new ActionComposee("SN");
+        ar.enrgComposition(abs, 0.8d);
+        ar.enrgComposition(tas, 0.2d);
 
         Marche marche = Marche.getInstance();
         
-        marche.addActions(axa, 5000);           // Ajoute une action avec une quantité
-        marche.addActions(bnp, 7500);
-        marche.addActions(afi, 3000);
-        marche.addActions(tis, 10700);
-        marche.addActions(abs, 5000);
-        marche.addActions(tas, 5000);
-        marche.addActions(ats, 5000);
-        marche.addActions(spr, 5000);
-        marche.addActions(cap, 5000);
-        marche.addActions(ar);                  // Ajoute une action composée sans qt (elle est caclulée
-        marche.addActions(fi);
-        marche.addActions(sn);
-        
+        marche.addAction(axa, 5000);
+        marche.addAction(bnp, 7500);
+        marche.addAction(afi, 3000);
+        marche.addAction(tis, 10700);
+        marche.addAction(abs, 5000);
+        marche.addAction(tas, 5000);
+        marche.addAction(ats, 5000);
+        marche.addAction(spr, 5000);
+        marche.addAction(cap, 5000);
+        marche.addAction(ar, 100);
+        marche.addAction(fi, 100);
+        marche.addAction(sn, 100);
+
         int jour = 0;                           // premier jours de la simulation on par du principe qu'on utilise que les jours
         boolean run = true;                     // état de l'execution
         String prompt;                          // capture les saisies user
@@ -86,20 +86,18 @@ public class Run {
             if (run) {
                 System.out.println("Vous êtes au jour" + String.valueOf(jour)); // quel jour
             
-                Marche.updateActions(); // fonction mettant a jours le prix journalier du marché (append prix journalier dans Action)
+                Marche.getInstance().updatePrix(); // fonction mettant a jours le prix journalier du marché (append prix journalier dans Action)
             
                 System.out.println("Liste des actions disponibles : "); // liste des actions disponibles
-                for (int i = 0; i < Marche.getInstance().actions.length()) {    // parcours la liste et to string avec qte
-                    System.out.println("Action      : \n" + 
-                                        Action.toString() + 
-                                        "\nquantité : \n" + qte);
+                Marche.getInstance().getActionComposeeList().toString();
+                Marche.getInstance().getActionSimpleList();
                 }
                 
-                system.out.println("liste des commandes disponibles : "  // fonctionalités us
+                System.out.println("liste des commandes disponibles : "  // fonctionalités us
                         + "voir action : voir -a <libelle action>"
-                        + "voir ...")
+                        + "voir ...");
             
-                Marche.tryOrders(); // fonction qui essaye de passer les ordres et générer les transactions
+                Marche.getInstance().traiterOrdres(); // fonction qui essaye de passer les ordres et générer les transactions
                 
                 jour += 1;  
             }
@@ -107,5 +105,3 @@ public class Run {
         }
  
     }
-
-}

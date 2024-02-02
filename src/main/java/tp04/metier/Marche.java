@@ -40,7 +40,16 @@ public class Marche {
         instance = new Marche();
     }
 
-    public Marche(Map<String, Integer> ActionQteMap, Map<String, Double> ActionPrixMap, List<Order> OrderAchatList, List<Order> OrderVenteList, List<Order> ValidOrderList, List<ActionSimple> ActionSimpleList, List<ActionComposee> ActionComposeeList, int j) {
+    public Marche(
+            Map<String, Integer> ActionQteMap,
+            Map<String, Double> ActionPrixMap,
+            List<Ordre> OrderAchatList,
+            List<Ordre> OrderVenteList,
+            List<Ordre> ValidOrderList,
+            List<ActionSimple> ActionSimpleList,
+            List<ActionComposee> ActionComposeeList,
+            int j)
+    {
         this.ActionQteMap = ActionQteMap;
         this.ActionPrixMap = ActionPrixMap;
         this.OrderAchatList = OrderAchatList;
@@ -50,10 +59,8 @@ public class Marche {
         this.ActionComposeeList = ActionComposeeList;
         this.jour = j;
     }
-
-
     
-    public static Marche getintance(){
+    public static Marche getInstance(){
         return instance;
     }
 
@@ -126,7 +133,7 @@ public class Marche {
     }
     
     public void addOrder(Ordre o){
-        if (o.estAchat){
+        if (o.getEstAchat()){
             this.OrderAchatList.add(o);
         }
         else {
@@ -136,7 +143,7 @@ public class Marche {
     
     public void addAction(Action a, int q){
         this.ActionQteMap.put(a.getLibelle(), q);
-        this.ActionPrixMap.put(a.getLibelle(), a.dernier_valeur());
+        this.ActionPrixMap.put(a.getLibelle(), a.derniere_valeur());
         if (a instanceof ActionSimple actionSimple) {
             this.ActionSimpleList.add(actionSimple);
         }
@@ -149,24 +156,24 @@ public class Marche {
         this.ActionQteMap.put(libelle, this.ActionQteMap.get(libelle)+q);
     }
     
-    public void UpdatePrix(){
+    public void updatePrix(){
         this.jour++;
         for (ActionSimple as : ActionSimpleList){
         as.Update();
-        this.ActionPrixMap.put(as.getLibelle(),as.dernier_valeur());
+        this.ActionPrixMap.put(as.getLibelle(),as.derniere_valeur());
     } 
         for (ActionComposee as : ActionComposeeList){
         as.Update();
-        this.ActionPrixMap.put(as.getLibelle(),as.dernier_valeur());
+        this.ActionPrixMap.put(as.getLibelle(),as.derniere_valeur());
     } 
     }
     
     public void validerOrdre(Ordre o){
-        if (o.estAchat){
+        if (o.getEstAchat()){
             int q = o.getQuantite();
-            double delta=q*ActionPrixMap(o.getAction().getLibelle());
-            o.portefeuille.updateSolde(-delta);
-            o.portefeuille.updateQteAction(o.getAction(),q);
+            double delta = q * this.ActionPrixMap.get(o.getAction().getLibelle());
+            o.getPortefeuille().updateSolde(-delta);
+            o.getPortefeuille().updateQteAction(o.getAction(),q);
             this.EchangeAction(o.getAction().getLibelle() , -o.getQuantite());
             this.ValidOrderList.add(o);
             this.OrderAchatList.remove(o);
@@ -174,34 +181,36 @@ public class Marche {
         }
         else{
             int q = o.getQuantite();
-            double delta=q*ActionPrixMap(o.getAction().getLibelle());
-            o.portefeuille.updateSolde(delta);
-            o.portefeuille.updateQteAction(o.getAction(),-q);
-            this.EchangeAction(o.getAction().getLibelle() , o.getQuantite());
+            double delta=q*ActionPrixMap.get(o.getAction().getLibelle());
+            o.getPortefeuille().updateSolde(delta);
+            o.getPortefeuille().updateQteAction(o.getAction(),-q);
+            this.EchangeAction(o.getAction().getLibelle(), o.getQuantite());
             this.ValidOrderList.add(o);
             this.OrderAchatList.remove(o);
         }
     }
     
     public void traiterOrdre(Ordre o){
-        if (o.estAuMarche){
+        if (o.getEstAuMarche()){
             this.validerOrdre(o);
         }
         else{
-            if (o.estAchat){
-                if (o.getPrixUnit()=<this.ActionPrixMap.get(o.getAction().getLibelle())){
+            if (o.getEstAchat()){
+                if (o.getPrixUnit() <= this.ActionPrixMap.get(o.getAction().getLibelle()))
+                {
                     this.validerOrdre(o);
                 }
-                elif (o.getdateCloture==this.jour){
+                else if (o.getDateCloture()==this.jour){
                     this.ValidOrderList.add(o);
                     this.OrderAchatList.remove(o);
                     o.getPortefeuille().updateSolde(o.getQuantite()*o.getPrixUnit());}
             }
             else{
-                if (o.getPrixUnit()>=this.ActionPrixMap.get(o.getAction().getLibelle())){
+                if (o.getPrixUnit() >= this.ActionPrixMap.get(o.getAction().getLibelle()))
+                {
                     this.validerOrdre(o);
                 }
-                elif (o.getdateCloture==this.jour){
+                else if (o.getDateCloture() == this.jour){
                     this.ValidOrderList.add(o);
                     this.OrderAchatList.remove(o);
                     o.getPortefeuille().updateQteAction(o.getAction(),o.getQuantite());}
@@ -210,11 +219,11 @@ public class Marche {
         }
     public void traiterOrdres(){
         for (Ordre o : this.OrderVenteList){
-        this.validerOrdre(o);
-    } 
+            this.validerOrdre(o);
+        } 
         for (Ordre o : this.OrderAchatList){
-        this.validerOrdre(o);
-    } 
+            this.validerOrdre(o);
+        } 
     }
         
     }

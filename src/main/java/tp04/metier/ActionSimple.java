@@ -32,13 +32,6 @@ import java.util.List;
  */
 public class ActionSimple extends Action {
 
-    // Attributs
-
-    /**
-     * Identifiant unique pour l'action simple.
-     */
-    private int id;
-
     /**
      * Nom de l'entreprise associée à l'action simple.
      */
@@ -73,9 +66,8 @@ public class ActionSimple extends Action {
      * @param domaine Domaine de l'action simple.
      * @param libelle Le libellé de l'action simple.
      */
-    public ActionSimple(int id, String entreprise, String domaine, String libelle) {
+    public ActionSimple(String entreprise, String domaine, String libelle) {
         super(libelle);
-        this.id = id;
         this.entreprise = entreprise;
         this.domaine = domaine;
         this.listeCours = new ArrayList();
@@ -89,24 +81,6 @@ public class ActionSimple extends Action {
      */
     public void enrgCours(Double v) {
         this.listeCours.add(v);
-    }
-
-    // Méthodes d'accès (Getters et Setters) pour les attributs
-
-    /**
-     * Obtient l'identifiant de l'action simple.
-     * @return L'identifiant de l'action simple.
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Modifie l'identifiant de l'action simple.
-     * @param Id Le nouvel identifiant de l'action simple.
-     */
-    public void setId(int Id) {
-        this.id = Id;
     }
 
     /**
@@ -177,8 +151,6 @@ public class ActionSimple extends Action {
     public double derniere_valeur() {
         return this.listeCours.get(this.listeCours.size()-1);
     }
-
-    // Méthode pour mettre à jour les valeurs de cours
 
     /**
      * Met à jour les valeurs de cours en générant 

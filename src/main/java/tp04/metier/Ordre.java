@@ -47,10 +47,10 @@ public class Ordre {
     private int quantite;
 
     /** La date d'ouverture de l'ordre. */
-    private String dateOuverture;
+    private int dateOuverture;
 
     /** La date de clôture de l'ordre. */
-    private String dateCloture;
+    private int dateCloture;
 
     /** Le portefeuille associé à l'ordre. */
     private Portefeuille portefeuille;
@@ -75,7 +75,7 @@ public class Ordre {
             Action action,
             double prixUnit,
             int quantite, 
-            String dateCloture,
+            int dateCloture,
             Portefeuille portefeuille
     ) {
         this.statut = Statut.OUVERT;
@@ -101,11 +101,11 @@ public class Ordre {
             boolean estAchat,
             Action action,
             int quantite, 
-            String dateCloture,
+            int dateCloture,
             Portefeuille portefeuille
     ) {
         this.statut = Statut.OUVERT;
-        this.prixUnit = action.derniere_valeur;
+        this.prixUnit = action.derniere_valeur();
         this.estAchat = estAchat;
         this.action = action;
         this.quantite = quantite;
@@ -209,7 +209,7 @@ public class Ordre {
      *
      * @return la date d'ouverture de l'ordre
      */
-    public String getDateOuverture() {
+    public int getDateOuverture() {
         return this.dateOuverture;
     }
 
@@ -218,7 +218,7 @@ public class Ordre {
      *
      * @param dateOuverture la nouvelle date d'ouverture de l'ordre
      */
-    public void setDateOuverture(String dateOuverture) {
+    public void setDateOuverture(int dateOuverture) {
         this.dateOuverture = dateOuverture;
     }
 
@@ -227,7 +227,7 @@ public class Ordre {
      *
      * @return la date de clôture de l'ordre
      */
-    public String getDateCloture() {
+    public int getDateCloture() {
         return this.dateCloture;
     }
 
@@ -236,7 +236,7 @@ public class Ordre {
      *
      * @param dateCloture la nouvelle date de clôture de l'ordre
      */
-    public void setDateCloture(String dateCloture) {
+    public void setDateCloture(int dateCloture) {
         this.dateCloture = dateCloture;
     }
 
