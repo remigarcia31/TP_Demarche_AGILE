@@ -25,13 +25,13 @@ import java.util.List;
  * @author Yanpei
  */
 public class Marche {
-    private Map<String,Integer> ActionQteMap;
-    private Map<String,Double> ActionPrixMap;
-    private List<Ordre> OrderAchatList;
-    private List<Ordre> OrderVenteList;
-    private List<Ordre> ValidOrderList;
-    private List<ActionSimple> ActionSimpleList;
-    private List<ActionComposee> ActionComposeeList;
+    private Map<String,Integer> actionQteMap;
+    private Map<String,Double> actionPrixMap;
+    private List<Ordre> orderAchatList;
+    private List<Ordre> orderVenteList;
+    private List<Ordre> validOrderList;
+    private List<ActionSimple> actionSimpleList;
+    private List<ActionComposee> actionComposeeList;
     private int jour;
     
     private static final Marche instance;
@@ -41,13 +41,13 @@ public class Marche {
 
     public Marche()
     {
-        this.ActionQteMap = new HashMap<>();
-        this.ActionPrixMap = new HashMap<>();
-        this.OrderAchatList = new ArrayList<>();
-        this.OrderVenteList = new ArrayList<>();
-        this.ValidOrderList = new ArrayList<>();
-        this.ActionSimpleList = new ArrayList<>();
-        this.ActionComposeeList = new ArrayList<>();
+        this.actionQteMap = new HashMap<>();
+        this.actionPrixMap = new HashMap<>();
+        this.orderAchatList = new ArrayList<>();
+        this.orderVenteList = new ArrayList<>();
+        this.validOrderList = new ArrayList<>();
+        this.actionSimpleList = new ArrayList<>();
+        this.actionComposeeList = new ArrayList<>();
         this.jour = 0;
     }
     
@@ -56,59 +56,59 @@ public class Marche {
     }
 
     public Map<String, Integer> getActionQteMap() {
-        return ActionQteMap;
+        return actionQteMap;
     }
 
     public void setActionQteMap(Map<String, Integer> ActionQteMap) {
-        this.ActionQteMap = ActionQteMap;
+        this.actionQteMap = ActionQteMap;
     }
 
     public Map<String, Double> getActionPrixMap() {
-        return ActionPrixMap;
+        return actionPrixMap;
     }
 
     public void setActionPrixMap(Map<String, Double> ActionPrixMap) {
-        this.ActionPrixMap = ActionPrixMap;
+        this.actionPrixMap = ActionPrixMap;
     }
 
     public List<Ordre> getOrderAchatList() {
-        return OrderAchatList;
+        return orderAchatList;
     }
 
     public void setOrderAchatList(List<Ordre> OrderAchatList) {
-        this.OrderAchatList = OrderAchatList;
+        this.orderAchatList = OrderAchatList;
     }
 
     public List<Ordre> getOrderVenteList() {
-        return OrderVenteList;
+        return orderVenteList;
     }
 
     public void setOrderVenteList(List<Ordre> OrderVenteList) {
-        this.OrderVenteList = OrderVenteList;
+        this.orderVenteList = OrderVenteList;
     }
 
     public List<ActionComposee> getActionComposeeList() {
-        return ActionComposeeList;
+        return actionComposeeList;
     }
 
     public void setActionComposeeList(List<ActionComposee> ActionComposeeList) {
-        this.ActionComposeeList = ActionComposeeList;
+        this.actionComposeeList = ActionComposeeList;
     }
 
     public List<Ordre> getValidOrderList() {
-        return ValidOrderList;
+        return validOrderList;
     }
 
     public void setValidOrderList(List<Ordre> ValidOrderList) {
-        this.ValidOrderList = ValidOrderList;
+        this.validOrderList = ValidOrderList;
     }
 
     public List<ActionSimple> getActionSimpleList() {
-        return ActionSimpleList;
+        return actionSimpleList;
     }
 
     public void setActionSimpleList(List<ActionSimple> ActionSimpleList) {
-        this.ActionSimpleList = ActionSimpleList;
+        this.actionSimpleList = ActionSimpleList;
     }
 
     public int getJ() {
@@ -121,59 +121,59 @@ public class Marche {
     
     public void addOrder(Ordre o){
         if (o.getEstAchat()){
-            this.OrderAchatList.add(o);
+            this.orderAchatList.add(o);
         }
         else {
-            this.OrderVenteList.add(o);
+            this.orderVenteList.add(o);
         }
     }
     
     public void addAction(Action a, int q){
-        this.ActionQteMap.put(a.getLibelle(), q);
-        this.ActionPrixMap.put(a.getLibelle(), a.derniere_valeur());
+        this.actionQteMap.put(a.getLibelle(), q);
+        this.actionPrixMap.put(a.getLibelle(), a.derniereValeur());
         if (a instanceof ActionSimple actionSimple) {
-            this.ActionSimpleList.add(actionSimple);
+            this.actionSimpleList.add(actionSimple);
         }
         if (a instanceof ActionComposee actionComposee) {
-            this.ActionComposeeList.add(actionComposee);
+            this.actionComposeeList.add(actionComposee);
         }
     }
     
     public void EchangeAction(String libelle, int q){
-        this.ActionQteMap.put(libelle, this.ActionQteMap.get(libelle)+q);
+        this.actionQteMap.put(libelle, this.actionQteMap.get(libelle)+q);
     }
     
     public void updatePrix(){
         this.jour++;
-        for (ActionSimple as : ActionSimpleList){
-        as.Update();
-        this.ActionPrixMap.put(as.getLibelle(),as.derniere_valeur());
+        for (ActionSimple as : actionSimpleList){
+        as.update();
+        this.actionPrixMap.put(as.getLibelle(),as.derniereValeur());
     } 
-        for (ActionComposee as : ActionComposeeList){
-        as.Update();
-        this.ActionPrixMap.put(as.getLibelle(),as.derniere_valeur());
+        for (ActionComposee as : actionComposeeList){
+        as.update();
+        this.actionPrixMap.put(as.getLibelle(),as.derniereValeur());
     } 
     }
     
     public void validerOrdre(Ordre o){
         if (o.getEstAchat()){
             int q = o.getQuantite();
-            double delta = q * this.ActionPrixMap.get(o.getAction().getLibelle());
+            double delta = q * this.actionPrixMap.get(o.getAction().getLibelle());
             o.getPortefeuille().updateSolde(-delta);
             o.getPortefeuille().updateQteAction(o.getAction(),q);
             this.EchangeAction(o.getAction().getLibelle() , -o.getQuantite());
-            this.ValidOrderList.add(o);
-            this.OrderAchatList.remove(o);
+            this.validOrderList.add(o);
+            this.orderAchatList.remove(o);
             // attendre modification dans la classe portefeuille
         }
         else{
             int q = o.getQuantite();
-            double delta=q*ActionPrixMap.get(o.getAction().getLibelle());
+            double delta=q*actionPrixMap.get(o.getAction().getLibelle());
             o.getPortefeuille().updateSolde(delta);
             o.getPortefeuille().updateQteAction(o.getAction(),-q);
             this.EchangeAction(o.getAction().getLibelle(), o.getQuantite());
-            this.ValidOrderList.add(o);
-            this.OrderAchatList.remove(o);
+            this.validOrderList.add(o);
+            this.orderAchatList.remove(o);
         }
     }
     
@@ -183,32 +183,32 @@ public class Marche {
         }
         else{
             if (o.getEstAchat()){
-                if (o.getPrixUnit() <= this.ActionPrixMap.get(o.getAction().getLibelle()))
+                if (o.getPrixUnit() <= this.actionPrixMap.get(o.getAction().getLibelle()))
                 {
                     this.validerOrdre(o);
                 }
                 else if (o.getDateCloture()==this.jour){
-                    this.ValidOrderList.add(o);
-                    this.OrderAchatList.remove(o);
+                    this.validOrderList.add(o);
+                    this.orderAchatList.remove(o);
                     o.getPortefeuille().updateSolde(o.getQuantite()*o.getPrixUnit());}
             }
             else{
-                if (o.getPrixUnit() >= this.ActionPrixMap.get(o.getAction().getLibelle()))
+                if (o.getPrixUnit() >= this.actionPrixMap.get(o.getAction().getLibelle()))
                 {
                     this.validerOrdre(o);
                 }
                 else if (o.getDateCloture() == this.jour){
-                    this.ValidOrderList.add(o);
-                    this.OrderAchatList.remove(o);
+                    this.validOrderList.add(o);
+                    this.orderAchatList.remove(o);
                     o.getPortefeuille().updateQteAction(o.getAction(),o.getQuantite());}
             }
             }
         }
     public void traiterOrdres(){
-        for (Ordre o : this.OrderVenteList){
+        for (Ordre o : this.orderVenteList){
             this.validerOrdre(o);
         } 
-        for (Ordre o : this.OrderAchatList){
+        for (Ordre o : this.orderAchatList){
             this.validerOrdre(o);
         } 
     }

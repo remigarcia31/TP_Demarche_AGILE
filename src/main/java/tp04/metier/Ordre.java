@@ -105,7 +105,7 @@ public class Ordre {
             Portefeuille portefeuille
     ) {
         this.statut = Statut.OUVERT;
-        this.prixUnit = action.derniere_valeur();
+        this.prixUnit = action.derniereValeur();
         this.estAchat = estAchat;
         this.action = action;
         this.quantite = quantite;

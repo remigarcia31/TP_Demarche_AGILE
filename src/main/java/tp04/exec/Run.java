@@ -25,7 +25,7 @@ public class Run {
 
     public static void main(String[] args) {
         
-        String ESN = "services numériques";
+        final String ESN = "services numériques";
         
         ActionSimple axa = new ActionSimple("AXA", "AXA Banque", "finance");
         ActionSimple bnp = new ActionSimple("BNP", "bnp pariba", "finance");
@@ -84,7 +84,7 @@ public class Run {
             
             prompt = in.nextLine();
             
-            if (prompt.toLowerCase().equals("stop")) {run = false;} // Stop on stope
+            if (prompt.equalsIgnoreCase("stop")) {run = false;} // Stop on stope
             
             if (run) {
                 System.out.println("Vous êtes au jour" + String.valueOf(jour)); // quel jour

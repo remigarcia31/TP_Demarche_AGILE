@@ -142,7 +142,7 @@ public class Portefeuille {
         int dateCloture)
     {
         boolean validite = true;
-        double total = action.derniere_valeur() * quantite;
+        double total = action.derniereValeur() * quantite;
         
         if (estAchat) validite = testSolde(total);
         if (!estAchat) validite = testQuantiteAction(quantite, action);
@@ -153,7 +153,7 @@ public class Portefeuille {
             Marche.getInstance().addOrder(new Ordre(
                     estAchat,
                     action,
-                    action.derniere_valeur(),
+                    action.derniereValeur(),
                     quantite,
                     dateCloture,
                     this));// Créé un ordre en vérifiant que le solde est suffisant et que le nombre d'actions            
@@ -245,7 +245,7 @@ public class Portefeuille {
         int temp = 0;
         
         for (Map.Entry<Action, Integer> entry: this.actions.entrySet()) {
-            temp += entry.getValue() * entry.getKey().derniere_valeur();
+            temp += entry.getValue() * entry.getKey().derniereValeur();
         }
         
         this.valeur = temp;

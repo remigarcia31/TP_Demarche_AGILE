@@ -61,15 +61,15 @@ public abstract class Action {
      * Modifie le libellé de l'action.
      * @param Libelle Le nouveau libellé de l'action.
      */
-    public void setLibelle(String Libelle) {
-        this.libelle = Libelle;
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 
     /**
      * Elle est abstraite pour s'assurer pour qu'elle soit imlementee partout.
      * @return derniere valeur
      */
-    public abstract double derniere_valeur();
+    public abstract double derniereValeur();
 
 
     /**

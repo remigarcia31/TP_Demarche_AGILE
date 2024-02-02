@@ -93,10 +93,10 @@ public class ActionSimple extends Action {
 
     /**
      * Modifie le nom de l'entreprise associée à l'action simple.
-     * @param Entreprise Le nouveau nom de l'entreprise.
+     * @param entreprise Le nouveau nom de l'entreprise.
      */
-    public void setEntreprise(String Entreprise) {
-        this.entreprise = Entreprise;
+    public void setEntreprise(String entreprise) {
+        this.entreprise = entreprise;
     }
 
     /**
@@ -109,10 +109,10 @@ public class ActionSimple extends Action {
 
     /**
      * Modifie le domaine de l'action simple.
-     * @param Domaine Le nouveau domaine de l'action simple.
+     * @param domaine Le nouveau domaine de l'action simple.
      */
-    public void setDomaine(String Domaine) {
-        this.domaine = Domaine;
+    public void setDomaine(String domaine) {
+        this.domaine = domaine;
     }
 
     /**
@@ -148,7 +148,7 @@ public class ActionSimple extends Action {
      * @return La dernière valeur de cours enregistrée.
      */
     @Override
-    public double derniere_valeur() {
+    public double derniereValeur() {
         return this.listeCours.get(this.listeCours.size()-1);
     }
 
@@ -157,7 +157,7 @@ public class ActionSimple extends Action {
      * une nouvelle valeur aléatoire entre 2 et -2,
      * puis l'ajoute à la dernière valeur enregistrée.
      */
-    public void Update(){
+    public void update(){
         double dernier_value = this.listeCours.get(this.listeCours.size()-1);
         this.listeCours.add(dernier_value + (Math.random() * 4) - 2);
     }
