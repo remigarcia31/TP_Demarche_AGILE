@@ -70,7 +70,7 @@ public class ActionSimple extends Action {
         super(libelle);
         this.entreprise = entreprise;
         this.domaine = domaine;
-        this.listeCours = new ArrayList();
+        this.listeCours = new ArrayList<Double>();
     }
 
     // Méthode pour enregistrer les valeurs de cours

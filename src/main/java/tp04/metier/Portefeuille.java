@@ -7,6 +7,7 @@
 package tp04.metier;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * La classe Portefeuille représente un portefeuille d'investissement qui contient des actions.
@@ -15,6 +16,8 @@ import java.util.Map;
  * @author gaboche
  */
 public class Portefeuille {
+    
+    Logger logger = Logger.getLogger(getClass().getName());
     
     /**
      * Liste des actions contenues par le portefeuille (action, quantité).
@@ -118,7 +121,7 @@ public class Portefeuille {
         if (!estAchat) validite = testQuantiteAction(quantite, action);
         
         if (validite) {
-            System.out.println("ordre ajouté au marché");
+            logger.info("ordre ajouté au marché");
             this.solde -= total ;
             Marche.getInstance().addOrder(new Ordre(estAchat, action, prixUnit, quantite, dateCloture, this));// Créé un ordre en vérifiant que le solde est suffisant et que le nombre d'actions            
         }
@@ -147,7 +150,7 @@ public class Portefeuille {
         if (!estAchat) validite = testQuantiteAction(quantite, action);
         
         if (validite) {
-            System.out.println("ordre ajouté au marché");
+            logger.info("ordre ajouté au marché");
             this.solde -= total ;
             Marche.getInstance().addOrder(new Ordre(
                     estAchat,
@@ -167,7 +170,7 @@ public class Portefeuille {
      */
     public boolean testSolde(double valeur) {
         if (valeur > solde) {
-            System.out.println("Prix total supérieur au solde disponible");
+            logger.info("Prix total supérieur au solde disponible");
             return false;
         }
         return true;
@@ -182,7 +185,7 @@ public class Portefeuille {
      */
     public boolean testQuantiteAction(int quantite, Action a) {
         if (quantite > this.actions.get(a)) {
-            System.out.println("Quantité à vendre supérieure à la quantité possédée");
+            logger.info("Quantité à vendre supérieure à la quantité possédée");
             return false;
         }
         return true;
