@@ -43,7 +43,7 @@ public abstract class Action {
      * Constructeur avec un paramètre pour initialiser le libellé de l'action.
      * @param libelle Le libellé de l'action.
      */
-    public Action(String libelle) {
+    protected Action(String libelle) {
         this.libelle = libelle;
     }
 

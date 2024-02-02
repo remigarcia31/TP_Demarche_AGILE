@@ -6,9 +6,7 @@
 
 package tp04.metier;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 /**
  * La classe Portefeuille représente un portefeuille d'investissement qui contient des actions.
@@ -35,6 +33,7 @@ public class Portefeuille {
     
     /**
      * Constructeur par défaut de la classe Portefeuille.
+     * @param solde
      */
     public Portefeuille(double solde) {
         this.solde = solde;
@@ -213,12 +212,13 @@ public class Portefeuille {
     }
     
     /**
-     * Met à jour la liste des actions en supprimant celles dont la quantité est égale à zéro.
+     * Met à jour la liste des actions en supprimant celles dont la quantité est
+     * égale à zéro.
      */
     public void updateActions() {
-        for (Action a: this.actions.keySet()){
-            if (this.actions.get(a) == 0) {
-                this.actions.remove(a);
+        for (Map.Entry<Action, Integer> entry: this.actions.entrySet()) {
+            if (entry.getValue() == 0) {
+                this.actions.remove(entry.getKey());
             }
         }
     }
@@ -240,11 +240,11 @@ public class Portefeuille {
     public void update()
     {
         this.updateActions();
-        
+
         int temp = 0;
         
-        for (Action a: this.actions.keySet()){
-            temp += this.actions.get(a) * a.derniere_valeur();
+        for (Map.Entry<Action, Integer> entry: this.actions.entrySet()) {
+            temp += entry.getValue() * entry.getKey().derniere_valeur();
         }
         
         this.valeur = temp;
