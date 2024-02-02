@@ -107,7 +107,8 @@ public class ActionComposee extends Action {
  * en utilisant les pourcentages associés.
  * @return La dernière valeur de l'action composée.
  */
-public double derniere_valeur() {
+    @Override
+    public double derniere_valeur() {
 
 
     // Initialise la valeur à 0.
@@ -116,7 +117,7 @@ public double derniere_valeur() {
     // Calcule la valeur totale de l'action composée en combinant 
     //les valeurs des actions simples avec les pourcentages.
     for (ActionSimple as : this.mapPanier.keySet()) {
-        valeur = valeur + (as.dernier_valeur() * this.mapPanier.get(as));
+        valeur = valeur + (as.derniere_valeur() * this.mapPanier.get(as));
     }
     
     return valeur; // Retourne la valeur totale de l'action composée.
