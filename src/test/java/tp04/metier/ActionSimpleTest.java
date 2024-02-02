@@ -17,33 +17,55 @@ package tp04.metier;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ActionSimpleTest {
 
-    @Test
-    public void testEquals() {
-        Action action1 = new ActionSimple("AXA", "AXA Banque", "finance");
-        Action action2 = new ActionSimple("BNP", "bnp pariba", "finance");
-        Action action3 = new ActionSimple("AFI", "Air France Industries", "transport");
+    private ActionSimple actionSimple;
 
-        // Teste l'égalité basée sur le libellé
-        assertEquals(action1, action2);
-        assertNotEquals(action1, action3);
+    @BeforeEach
+    public void setUp() {
+        actionSimple = new ActionSimple("AAPL", "Technology", "Apple Inc.");
     }
 
     @Test
-    public void testToString() {
-        Action action = new ActionSimple("AXA", "AXA Banque", "finance");
-
-        // Teste la représentation textuelle (toString) basée sur le libellé
-        assertEquals("finance", action.toString());
+    void testGetSetEntreprise() {
+        actionSimple.setEntreprise("GOOGL");
+        assertEquals("GOOGL", actionSimple.getEntreprise());
     }
 
     @Test
-    public void testDerniereValeur() {
-        Action action = new ActionSimple("AXA", "AXA Banque", "finance");
-
-        // Teste la dernière valeur de l'action
-        assertEquals(50.0, action.derniere_valeur(), 0.01);
+    void testGetSetDomaine() {
+        actionSimple.setDomaine("Consumer Electronics");
+        assertEquals("Consumer Electronics", actionSimple.getDomaine());
     }
+
+    @Test
+    void testGetSetListeCours() {
+        List<Double> newList = new ArrayList<>();
+        newList.add(150.0);
+        newList.add(155.0);
+        newList.add(160.0);
+        actionSimple.setListeCours(newList);
+
+        assertEquals(newList, actionSimple.getListeCours());
+    }
+
+    @Test
+    void testEnrgCours() {
+        actionSimple.enrgCours(150.0);
+
+        assertEquals(150.0, actionSimple.derniere_valeur());
+        assertEquals(150.0, actionSimple.valeur(0));
+    }
+
+    @Test
+    void testUpdate() {
+        actionSimple.Update();
+
+        assertTrue(actionSimple.derniere_valeur() >= 0 && actionSimple.derniere_valeur() <= 200);
+    }   
+    
 }
