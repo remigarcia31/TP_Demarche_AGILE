@@ -12,8 +12,8 @@ package tp04.metier;
  */
 public class Jour {
 
-    private int annee;
-    private int noJour;
+    private final int annee;
+    private final int noJour;
 
     /**
      * Get the value of annee
@@ -24,7 +24,6 @@ public class Jour {
         return annee;
     }
 
-
     /**
      * Get the value of noJour
      *
@@ -34,6 +33,11 @@ public class Jour {
         return noJour;
     }
 
+    /**
+     *
+     * @param annee
+     * @param noJour
+     */
     public Jour(int annee, int noJour) {
         this.annee = annee;
         this.noJour = noJour;
@@ -59,10 +63,6 @@ public class Jour {
         if (this.annee != other.annee) {
             return false;
         }
-        if (this.noJour != other.noJour) {
-            return false;
-        }
-        return true;
+        return this.noJour == other.noJour;
     }
-  
 }
