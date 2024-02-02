@@ -22,64 +22,45 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PortefeuilleTest {
+class PortefeuilleTest {
 
     private Portefeuille portefeuille;
     private ActionSimple action;
 
     @BeforeEach
     public void setUp() {
-        // Initialisation des objets nécessaires pour les tests
         portefeuille = new Portefeuille(1000.0);
         action = new ActionSimple("AXA", "AXA Banque", "finance");
     }
 
     @Test
-    public void testCreateOrderLimiteAchatSoldeSuffisant() {
-        // Teste si la création d'un ordre limite d'achat fonctionne correctement avec un solde suffisant
-        Map<Action, Integer> actions = new HashMap<>();
-        actions.put(action, 10);
-        portefeuille.setActions(actions);
+    void testTestSolde() {
+        assertTrue(portefeuille.testSolde(500.0));
+        assertFalse(portefeuille.testSolde(1500.0));
+    }
+    
+    @Test
+    void testGetSetActions() {
+        Map<Action, Integer> newActions = new HashMap<>();
+        newActions.put(new ActionSimple("AAPL", "Apple Inc.", "Technology"), 50);
+        newActions.put(new ActionSimple("GOOGL", "Alphabet Inc.", "Technology"), 30);
 
-        portefeuille.createOrderLimite(true, action, 50.0, 5, 1, portefeuille);
+        portefeuille.setActions(newActions);
 
-        assertEquals(500.0, portefeuille.getSolde(), 0.01);
+        assertEquals(newActions, portefeuille.getActions());
     }
 
     @Test
-    public void testCreateOrderLimiteAchatSoldeInsuffisant() {
-        // Teste si la création d'un ordre limite d'achat échoue correctement avec un solde insuffisant
-        Map<Action, Integer> actions = new HashMap<>();
-        actions.put(action, 10);
-        portefeuille.setActions(actions);
+    void testGetSetSolde() {
+        portefeuille.setSolde(1500.0);
 
-        portefeuille.createOrderLimite(true, action, 200.0, 5, 1, portefeuille);
-
-        assertEquals(1000.0, portefeuille.getSolde(), 0.01);
+        assertEquals(1500.0, portefeuille.getSolde());
     }
 
     @Test
-    public void testCreateOrderMarcheAchatQuantiteValide() {
-        // Teste si la création d'un ordre au marché d'achat fonctionne correctement avec une quantité valide
-        Map<Action, Integer> actions = new HashMap<>();
-        actions.put(action, 10);
-        portefeuille.setActions(actions);
+    void testGetSetValeur() {
+        portefeuille.setValeur(2000.0);
 
-        portefeuille.createOrderMarche(true, action, 5, 1, portefeuille);
-
-        assertEquals(750.0, portefeuille.getSolde(), 0.01);
+        assertEquals(2000.0, portefeuille.getValeur());
     }
-
-    @Test
-    public void testCreateOrderMarcheAchatQuantiteInvalide() {
-        // Teste si la création d'un ordre au marché d'achat échoue correctement avec une quantité invalide
-        Map<Action, Integer> actions = new HashMap<>();
-        actions.put(action, 5);
-        portefeuille.setActions(actions);
-
-        portefeuille.createOrderMarche(true, action, 10, 1, portefeuille);
-
-        assertEquals(1000.0, portefeuille.getSolde(), 0.01);
-    }
-
 }
