@@ -20,9 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-import java.util.Queue;
-import tp04.metier.Action;
-import tp04.metier.ActionSimple;
 /**
  *
  * @author Yanpei
@@ -44,13 +41,13 @@ public class Marche {
 
     public Marche()
     {
-        this.ActionQteMap = new HashMap<String, Integer>();
-        this.ActionPrixMap = new HashMap<String, Double>();
-        this.OrderAchatList = new ArrayList<Ordre>();
-        this.OrderVenteList = new ArrayList<Ordre>();
-        this.ValidOrderList = new ArrayList<Ordre>();
-        this.ActionSimpleList = new ArrayList<ActionSimple>();
-        this.ActionComposeeList = new ArrayList<ActionComposee>();
+        this.ActionQteMap = new HashMap<>();
+        this.ActionPrixMap = new HashMap<>();
+        this.OrderAchatList = new ArrayList<>();
+        this.OrderVenteList = new ArrayList<>();
+        this.ValidOrderList = new ArrayList<>();
+        this.ActionSimpleList = new ArrayList<>();
+        this.ActionComposeeList = new ArrayList<>();
         this.jour = 0;
     }
     

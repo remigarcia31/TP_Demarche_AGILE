@@ -111,8 +111,7 @@ public class Portefeuille {
         Action action,
         double prixUnit,
         int quantite, 
-        int dateCloture,
-        Portefeuille portefeuille)
+        int dateCloture)
     {
         boolean validite = true;
         double total = prixUnit * quantite;
@@ -140,8 +139,7 @@ public class Portefeuille {
         boolean estAchat,
         Action action,
         int quantite, 
-        int dateCloture,
-        Portefeuille portefeuille)
+        int dateCloture)
     {
         boolean validite = true;
         double total = action.derniere_valeur() * quantite;

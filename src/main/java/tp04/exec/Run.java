@@ -15,11 +15,9 @@
  */
 package tp04.exec;
 
-import tp04.metier.Action;
 import tp04.metier.ActionComposee;
 import tp04.metier.ActionSimple;
 import tp04.metier.Marche;
-import tp04.metier.Ordre;
 import tp04.metier.Portefeuille;
 import java.util.Scanner;
 
@@ -71,6 +69,8 @@ public class Run {
         boolean run = true;                     // état de l'execution
         String prompt;                          // capture les saisies user
         Scanner in = new Scanner(System.in);    // Scanner retourne les saisie user
+        Portefeuille p = new Portefeuille(10000d);
+        p.createOrderMarche(true, ats, 0, 2);
         
         while (run) {                           // tant qu'on tourne
             if (jour == 0) {                    // si premier jour 
