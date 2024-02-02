@@ -77,7 +77,7 @@ public class Run {
                 System.out.println("Bienvenue dans la simulation de bourse\n");
             }
             else {                              // sinon
-                System.out.println("Jour " + String.valueOf(jour) + " de la simulation");
+                System.out.println("Jour " + jour + " de la simulation");
             }
             
             System.out.println("saisissez GO pour continuer STOP pour sortir");
@@ -86,7 +86,7 @@ public class Run {
             if (prompt.equalsIgnoreCase("stop")) {run = false;} // Stop on stope
             
             if (run) {
-                System.out.println("Vous êtes au jour" + String.valueOf(jour)); // quel jour
+                System.out.println("Vous êtes au jour" + jour); // quel jour
                 Marche.getInstance().updatePrix(); // fonction mettant a jours le prix journalier du marché (append prix journalier dans Action)
                 System.out.println("Liste des actions disponibles : "); // liste des actions disponibles
                 Marche.getInstance().getActionComposeeList().toString();

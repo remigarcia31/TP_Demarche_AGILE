@@ -139,7 +139,7 @@ public class Marche {
         }
     }
     
-    public void EchangeAction(String libelle, int q){
+    public void echangeAction(String libelle, int q){
         this.actionQteMap.put(libelle, this.actionQteMap.get(libelle)+q);
     }
     
@@ -161,7 +161,7 @@ public class Marche {
             double delta = q * this.actionPrixMap.get(o.getAction().getLibelle());
             o.getPortefeuille().updateSolde(-delta);
             o.getPortefeuille().updateQteAction(o.getAction(),q);
-            this.EchangeAction(o.getAction().getLibelle() , -o.getQuantite());
+            this.echangeAction(o.getAction().getLibelle() , -o.getQuantite());
             this.validOrderList.add(o);
             this.orderAchatList.remove(o);
             // attendre modification dans la classe portefeuille
@@ -171,7 +171,7 @@ public class Marche {
             double delta=q*actionPrixMap.get(o.getAction().getLibelle());
             o.getPortefeuille().updateSolde(delta);
             o.getPortefeuille().updateQteAction(o.getAction(),-q);
-            this.EchangeAction(o.getAction().getLibelle(), o.getQuantite());
+            this.echangeAction(o.getAction().getLibelle(), o.getQuantite());
             this.validOrderList.add(o);
             this.orderAchatList.remove(o);
         }

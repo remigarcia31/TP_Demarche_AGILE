@@ -29,7 +29,7 @@ public class Ordre {
         OUVERT,
         VALIDER,
         REFUSER
-    };
+    }
 
     /** Le statut actuel de l'ordre. */
     private Statut statut;
