@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package metier;
 
 /**
  * Représente un ordre qui teste le marché (prix quantité) pour permettre la réalisation d'une transaction.

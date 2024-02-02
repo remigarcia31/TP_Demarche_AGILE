@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tp04.metier;
+package metier;
 
 import java.util.Map;
 import java.util.logging.Logger;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.metier;
+package metier;
 
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;

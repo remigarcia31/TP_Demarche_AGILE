@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tp04.metier;
+package metier;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;

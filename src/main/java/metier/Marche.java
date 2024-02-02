@@ -1,4 +1,4 @@
-package tp04.metier;
+package metier;
 /*
  * Copyright 2024 Yanpei.
  *

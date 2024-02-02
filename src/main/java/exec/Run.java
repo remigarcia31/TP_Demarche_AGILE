@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tp04.exec;
+package exec;
 
-import tp04.metier.ActionComposee;
-import tp04.metier.ActionSimple;
-import tp04.metier.Marche;
-import tp04.metier.Portefeuille;
+import metier.ActionComposee;
+import metier.ActionSimple;
+import metier.Marche;
+import metier.Portefeuille;
 import java.util.Scanner;
 
 public class Run {
@@ -81,30 +81,23 @@ public class Run {
             }
             
             System.out.println("saisissez GO pour continuer STOP pour sortir");
-            
             prompt = in.nextLine();
             
             if (prompt.equalsIgnoreCase("stop")) {run = false;} // Stop on stope
             
             if (run) {
                 System.out.println("Vous êtes au jour" + String.valueOf(jour)); // quel jour
-            
                 Marche.getInstance().updatePrix(); // fonction mettant a jours le prix journalier du marché (append prix journalier dans Action)
-            
                 System.out.println("Liste des actions disponibles : "); // liste des actions disponibles
                 Marche.getInstance().getActionComposeeList().toString();
                 Marche.getInstance().getActionSimpleList();
-                }
-                
-                System.out.println("liste des commandes disponibles : "  // fonctionalités us
-                        + "voir action : voir -a <libelle action>"
-                        + "voir ...");
-            
-                Marche.getInstance().traiterOrdres(); // fonction qui essaye de passer les ordres et générer les transactions
-                
-                jour += 1;  
             }
- 
+
+            System.out.println("liste des commandes disponibles : " // fonctionalités us
+                    + "voir action : voir -a <libelle action>"
+                    + "voir ...");
+            Marche.getInstance().traiterOrdres(); // fonction qui essaye de passer les ordres et générer les transactions
+            jour += 1; 
         }
- 
     }
+}
