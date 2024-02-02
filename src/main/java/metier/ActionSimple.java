@@ -158,7 +158,7 @@ public class ActionSimple extends Action {
      * puis l'ajoute à la dernière valeur enregistrée.
      */
     public void update(){
-        double dernier_value = this.listeCours.get(this.listeCours.size()-1);
-        this.listeCours.add(dernier_value + (Math.random() * 4) - 2);
+        double dernierValue = this.listeCours.get(this.listeCours.size()-1);
+        this.listeCours.add(dernierValue + (Math.random() * 4) - 2);
     }
 }
