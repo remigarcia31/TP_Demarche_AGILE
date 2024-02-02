@@ -49,7 +49,7 @@ public class ActionComposee extends Action {
      */
     public ActionComposee(String libelle) {
         super(libelle);
-        this.mapPanier = new HashMap();
+        this.mapPanier = new HashMap<ActionSimple, Double>();
     }
 
     // Méthodes pour la gestion de la composition
@@ -97,11 +97,12 @@ public class ActionComposee extends Action {
      * @return La valeur de l'action composée pour le jour spécifié.
      */
     public double valeur(int j) {
-        Double valeur;
-        valeur = Double.valueOf(0) ;
-        for (ActionSimple as : this.mapPanier.keySet()) {
-            valeur = valeur + (as.getListeCours().get(j) * this.mapPanier.get(as));
+        Double valeur = Double.valueOf(0);
+        
+        for (Map.Entry<ActionSimple, Double> entry: this.mapPanier.entrySet()) {
+            valeur += entry.getKey().getListeCours().get(j) * entry.getValue();
         }
+        
         return valeur;
     }
     /**
@@ -123,8 +124,8 @@ public class ActionComposee extends Action {
 
     // Calcule la valeur totale de l'action composée en combinant 
     //les valeurs des actions simples avec les pourcentages.
-    for (ActionSimple as : this.mapPanier.keySet()) {
-        valeur = valeur + (as.derniere_valeur() * this.mapPanier.get(as));
+    for (Map.Entry<ActionSimple, Double> entry: this.mapPanier.entrySet()) {
+        valeur = valeur + (entry.getKey().derniere_valeur() * entry.getValue());
     }
     
     return valeur; // Retourne la valeur totale de l'action composée.
@@ -137,8 +138,8 @@ public class ActionComposee extends Action {
      * des actions simples dans la composition.
      */
     public void Update() {
-        for (ActionSimple as : this.mapPanier.keySet()) {
-            as.Update();
+        for (ActionSimple action : this.mapPanier.keySet()) {
+            action.Update();
         }
     }
 }

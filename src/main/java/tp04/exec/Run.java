@@ -26,15 +26,18 @@ import java.util.Scanner;
 public class Run {
 
     public static void main(String[] args) {
+        
+        String ESN = "services numériques";
+        
         ActionSimple axa = new ActionSimple("AXA", "AXA Banque", "finance");
         ActionSimple bnp = new ActionSimple("BNP", "bnp pariba", "finance");
         ActionSimple afi = new ActionSimple("AFI", "Air France Industries", "transport");
         ActionSimple tis = new ActionSimple("TIS", "TISSEO", "transport");
         ActionSimple abs = new ActionSimple("ABS", "Air Bus", "aerospace");
         ActionSimple tas = new ActionSimple("TAS", "Thales ALenia Space", "aerospace");
-        ActionSimple ats = new ActionSimple("ATS", "Atos", "services numérique");
-        ActionSimple spr = new ActionSimple("SPR", "Sopra Steria", "services numérique");
-        ActionSimple cap = new ActionSimple("CAP", "Capgemini", "services numérique");
+        ActionSimple ats = new ActionSimple("ATS", "Atos", ESN);
+        ActionSimple spr = new ActionSimple("SPR", "Sopra Steria", ESN);
+        ActionSimple cap = new ActionSimple("CAP", "Capgemini", ESN);
         
         ActionComposee ar = new ActionComposee("AR");
         ar.enrgComposition(abs, 0.8d);

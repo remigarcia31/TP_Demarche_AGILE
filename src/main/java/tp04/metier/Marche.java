@@ -16,9 +16,11 @@ package tp04.metier;
  */
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Queue;
 import tp04.metier.Action;
 import tp04.metier.ActionSimple;
 /**
@@ -40,32 +42,20 @@ public class Marche {
         instance = new Marche();
     }
 
-    public Marche(
-            Map<String, Integer> ActionQteMap,
-            Map<String, Double> ActionPrixMap,
-            List<Ordre> OrderAchatList,
-            List<Ordre> OrderVenteList,
-            List<Ordre> ValidOrderList,
-            List<ActionSimple> ActionSimpleList,
-            List<ActionComposee> ActionComposeeList,
-            int j)
+    public Marche()
     {
-        this.ActionQteMap = ActionQteMap;
-        this.ActionPrixMap = ActionPrixMap;
-        this.OrderAchatList = OrderAchatList;
-        this.OrderVenteList = OrderVenteList;
-        this.ValidOrderList = ValidOrderList;
-        this.ActionSimpleList = ActionSimpleList;
-        this.ActionComposeeList = ActionComposeeList;
-        this.jour = j;
+        this.ActionQteMap = new HashMap<String, Integer>();
+        this.ActionPrixMap = new HashMap<String, Double>();
+        this.OrderAchatList = new ArrayList<Ordre>();
+        this.OrderVenteList = new ArrayList<Ordre>();
+        this.ValidOrderList = new ArrayList<Ordre>();
+        this.ActionSimpleList = new ArrayList<ActionSimple>();
+        this.ActionComposeeList = new ArrayList<ActionComposee>();
+        this.jour = 0;
     }
     
     public static Marche getInstance(){
         return instance;
-    }
-
-    private Marche() {
-        
     }
 
     public Map<String, Integer> getActionQteMap() {
